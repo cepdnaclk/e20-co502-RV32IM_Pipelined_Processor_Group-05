@@ -7,7 +7,7 @@ permalink: index.html
 
 [comment]: # "This is the standard layout for the project, but you can clean this and use your own template"
 
-# Project Title
+# RV32IM Pipeline Processor 
 
 ---
 
