@@ -9,9 +9,7 @@ module controlUnit(INSTRUCTION, MUX1, MUX2, MUX3, ALUOP,REGISTERWRITE, MEMORYWRI
     output reg [2:0] IMMEDIATE;
     
 /*
-*********** Instruction set ***************
-
-
+***********************   Instruction set   **********************
 
 Control signals
 
@@ -26,7 +24,7 @@ JAL             No jal               Jal
 
 ALU operations
 ALUOP   Operation   Description
-00000   add         add 2 numbers
+00000   add         additon
 00001   sll         shift left logical
 00010   slt         set less than
 00011   sltu        set less than unsigned
@@ -127,6 +125,8 @@ J-type instructions
     Instruction  OP-Code  ALUOP  MUX1  MUX2  MUX3 REGISTERWRITE MEMORYWRITE MEMORYREAD BRANCH  JUMP JAL  IMM
     jal          1101111  00000    0     0     X    1             0           0          0      1    1   101
 
+
+********************************************************************
 */
 
 always @(INSTRUCTION) //Decoding the instruction 
