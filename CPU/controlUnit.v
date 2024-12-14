@@ -11,16 +11,48 @@ module controlUnit(INSTRUCTION, MUX1, MUX2, MUX3, ALUOP,REGISTERWRITE, MEMORYWRI
 /*
 *********** Instruction set ***************
 
+
+
+Control signals
+
+Unit            0                    1
+Multiplexer     select 0 input       select 1 input
+REGISTERWRITE   Write disale         Write enable
+MEMORYWRITE     Write disale         Write enable
+MEMORYREAD      Read disale          Read enable
+BRANCH          No branch            Branch
+JUMP            No jump              Jump
+JAL             No jal               Jal
+
+ALU operations
+ALUOP   Operation   Description
+00000   add         add 2 numbers
+00001   sll         shift left logical
+00010   slt         set less than
+00011   sltu        set less than unsigned
+00100   xor         bitwise xor
+00101   srl         shift right logical
+00110   or          bitwise or
+00111   and         bitwise and
+01000   mul         multiply
+01001   mulh        multiply high
+01010   mulhsu      multiply high signed/unsigned
+01011   mulhu       multiply high unsigned
+01100   div         divide
+01101   rem         remainder
+01111   remu        remainder unsigned
+
 Immidiate values
 
-INstruction     IMM
-R-type          000
-U-type          000
-I-type          001
-I-type shift    010
-S-type          011
-B-type          100
-J-type          101
+INstruction         IMM
+R-type              000
+U-type              000
+I-type              001
+I-type srli/srai    010
+S-type              011
+B-type              100
+J-type              101
+
 
 
 R-type instructions
@@ -104,6 +136,214 @@ always @(INSTRUCTION) //Decoding the instruction
         FUNCT7 = INSTRUCTION[31:25];
         
         // Add decoding logic here based on OPCODE, FUNCT3, and FUNCT7
+        // Use the decoded values to set the control signals
+
+        case(OPCODE)
+
+        // R-type instructions
+
+            7'b0110011: begin
+                case(FUNCT3)
+                    3'b000: begin
+                        case(FUNCT7)
+
+                            // add, sll, slt, sltu, xor, or, and
+                            7'b0000000: begin
+                                assign ALUOP = 5'b00000 + FUNCT3;
+                                assign MUX1 = 1;
+                                assign MUX2 = 1;
+                                assign MUX3 = 0;
+                                assign REGISTERWRITE = 1;
+                                assign MEMORYWRITE = 0;
+                                assign MEMORYREAD = 0;
+                                assign BRANCH = 0;
+                                assign JUMP = 0;
+                                assign JAL = 0;
+                                assign IMMEDIATE = 3'b000;
+                            end
+
+                            // sub, sra
+                            7'b0100000: begin
+                                assign ALUOP = 5'b00000 + FUNCT3;
+                                assign MUX1 = 1;
+                                assign MUX2 = 1;
+                                assign MUX3 = 0;
+                                assign REGISTERWRITE = 1;
+                                assign MEMORYWRITE = 0;
+                                assign MEMORYREAD = 0;
+                                assign BRANCH = 0;
+                                assign JUMP = 0;
+                                assign JAL = 0;
+                                assign IMMEDIATE = 3'b000;
+                            end
+
+                            // mul, mulh, mulhsu, mulhu, div, rem, remu
+                            7'b0111011: begin
+                                assign ALUOP = 5'b01000 + FUNCT3;
+                                assign MUX1 = 1;
+                                assign MUX2 = 1;
+                                assign MUX3 = 0;
+                                assign REGISTERWRITE = 1;
+                                assign MEMORYWRITE = 0;
+                                assign MEMORYREAD = 0;
+                                assign BRANCH = 0;
+                                assign JUMP = 0;
+                                assign JAL = 0;
+                                assign IMMEDIATE = 3'b000;
+                            end
+                        endcase
+                    end
+                    endcase
+            end
+
+        // I-type instructions
+
+            // lb, lh, lw, lbu, lhu
+            7'b0000011: begin
+                assign ALUOP = 5'b10000 ;
+                assign MUX1 = 1;
+                assign MUX2 = 1;
+                assign MUX3 = 1;
+                assign REGISTERWRITE = 1;
+                assign MEMORYWRITE = 1;
+                assign MEMORYREAD = 0;
+                assign BRANCH = 0;
+                assign JUMP = 0;
+                assign JAL = 0;
+                assign IMMEDIATE = 3'b001;
+                // case(FUNCT3)
+                //     3'b000: assign IMMEDIATE = 3'b001;
+                //     3'b001: assign IMMEDIATE = 3'b001;
+                //     3'b010: assign IMMEDIATE = 3'b010;
+                //     3'b100: assign IMMEDIATE = 3'b100;
+                //     3'b101: assign IMMEDIATE = 3'b101;
+                // endcase
+            end
+
+            // addi, slli, slti, sltiu, xori, srli, srai, ori, andi
+            7'b0010011: begin
+                assign ALUOP = 5'b00000 + FUNCT3;
+                assign MUX1 = 1;
+                assign MUX2 = 0;
+                assign MUX3 = 0;
+                assign REGISTERWRITE = 1;
+                assign MEMORYWRITE = 0;
+                assign MEMORYREAD = 0;
+                assign BRANCH = 0;
+                assign JUMP = 0;
+                assign JAL = 0;
+                case(FUNCT3)
+                    3'b000: assign IMMEDIATE = 3'b001;
+                    3'b001: assign IMMEDIATE = 3'b001;
+                    3'b010: assign IMMEDIATE = 3'b001;
+                    3'b011: assign IMMEDIATE = 3'b001;
+                    3'b100: assign IMMEDIATE = 3'b001;
+                    3'b101: assign IMMEDIATE = 3'b010;
+                    3'b110: assign IMMEDIATE = 3'b001;
+                    3'b111: assign IMMEDIATE = 3'b001;
+                endcase
+            end
+
+            //jalr
+            7'b1100111: begin
+                assign ALUOP = 5'b00000;
+                assign MUX1 = 1;
+                assign MUX2 = 0;
+                assign MUX3 = 0;
+                assign REGISTERWRITE = 1;
+                assign MEMORYWRITE = 0;
+                assign MEMORYREAD = 0;
+                assign BRANCH = 0;
+                assign JUMP = 1;
+                assign JAL = 0;
+                assign IMMEDIATE = 3'b001;
+            end
+
+        // S-type instructions
+
+            // sb, sh, sw, sbu, shu
+            7'b0100011: begin
+                assign ALUOP = 5'b00000;
+                assign MUX1 = 0;
+                assign MUX2 = 1;
+                assign MUX3 = 0;
+                assign REGISTERWRITE = 0;
+                assign MEMORYWRITE = 1;
+                assign MEMORYREAD = 0;
+                assign BRANCH = 0;
+                assign JUMP = 0;
+                assign JAL = 0;
+                assign IMMEDIATE = 3'b011;
+            end
+
+        // U-type instructions
+
+            // auipc
+            7'b0010111: begin
+                assign ALUOP = 5'b00000;
+                assign MUX1 = 0;
+                assign MUX2 = 0;
+                assign MUX3 = 0;
+                assign REGISTERWRITE = 1;
+                assign MEMORYWRITE = 0;
+                assign MEMORYREAD = 0;
+                assign BRANCH = 0;
+                assign JUMP = 0;
+                assign JAL = 0;
+                assign IMMEDIATE = 3'b000;
+            end
+
+            // lui
+            7'b0110111: begin
+                assign ALUOP = 5'b10000;
+                assign MUX1 = 0;
+                assign MUX2 = 0;
+                assign MUX3 = 0;
+                assign REGISTERWRITE = 1;
+                assign MEMORYWRITE = 0;
+                assign MEMORYREAD = 0;
+                assign BRANCH = 0;
+                assign JUMP = 0;
+                assign JAL = 0;
+                assign IMMEDIATE = 3'b000;
+            end
+
+        // B-type instructions
+
+            // beq, bne, blt, bge, bltu, bgeu
+            7'b1100011: begin
+                assign ALUOP = 5'b00000;
+                assign MUX1 = 0;
+                assign MUX2 = 0;
+                assign MUX3 = 0;
+                assign REGISTERWRITE = 0;
+                assign MEMORYWRITE = 0;
+                assign MEMORYREAD = 0;
+                assign BRANCH = 1;
+                assign JUMP = 0;
+                assign JAL = 0;
+                assign IMMEDIATE = 3'b100;
+            end
+
+        // J-type instructions
+        
+            // jal
+            7'b1101111: begin
+                assign ALUOP = 5'b00000;
+                assign MUX1 = 0;
+                assign MUX2 = 0;
+                assign MUX3 = 0;
+                assign REGISTERWRITE = 1;
+                assign MEMORYWRITE = 0;
+                assign MEMORYREAD = 0;
+                assign BRANCH = 0;
+                assign JUMP = 1;
+                assign JAL = 1;
+                assign IMMEDIATE = 3'b101;
+            end
+
+
+        endcase
     end
 
 endmodule
