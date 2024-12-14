@@ -13,14 +13,14 @@ module controlUnit(INSTRUCTION, MUX1, MUX2, MUX3, ALUOP,REGISTERWRITE, MEMORYWRI
 
 Control signals
 
-Unit            0                    1
-Multiplexer     select 0 input       select 1 input
-REGISTERWRITE   Write disale         Write enable
-MEMORYWRITE     Write disale         Write enable
-MEMORYREAD      Read disale          Read enable
-BRANCH          No branch            Branch
-JUMP            No jump              Jump
-JAL             No jal               Jal
+Unit            0                       1
+Multiplexer     select 0 input          select 1 input
+REGISTERWRITE   Register Write disale   Register write enable
+MEMORYWRITE     Memory Write disale     Memory write enable
+MEMORYREAD      Memory Read disale      Memory Read enable
+BRANCH          No branch               Branch
+JUMP            No jump                 Jump
+JAL             No jal                  Jal
 
 ALU operations
 ALUOP   Operation   Description
@@ -149,7 +149,7 @@ always @(INSTRUCTION) //Decoding the instruction
 
                             // add, sll, slt, sltu, xor, or, and
                             7'b0000000: begin
-                                assign ALUOP = 5'b00000 + FUNCT3;
+                                assign ALUOP = {5'b00, FUNCT3}; //extend Funct3 to 5 bits by adding 00 in the MSB
                                 assign MUX1 = 1;
                                 assign MUX2 = 1;
                                 assign MUX3 = 0;
@@ -164,7 +164,7 @@ always @(INSTRUCTION) //Decoding the instruction
 
                             // sub, sra
                             7'b0100000: begin
-                                assign ALUOP = 5'b00000 + FUNCT3;
+                                assign ALUOP = {5'b00, FUNCT3}; //extend Funct3 to 5 bits by adding 00 in the MSB
                                 assign MUX1 = 1;
                                 assign MUX2 = 1;
                                 assign MUX3 = 0;
@@ -179,7 +179,7 @@ always @(INSTRUCTION) //Decoding the instruction
 
                             // mul, mulh, mulhsu, mulhu, div, rem, remu
                             7'b0111011: begin
-                                assign ALUOP = 5'b01000 + FUNCT3;
+                                assign ALUOP = {5'b01, FUNCT3}; //extend Funct3 to 5 bits by adding 01 in the MSB
                                 assign MUX1 = 1;
                                 assign MUX2 = 1;
                                 assign MUX3 = 0;
@@ -210,7 +210,11 @@ always @(INSTRUCTION) //Decoding the instruction
                 assign BRANCH = 0;
                 assign JUMP = 0;
                 assign JAL = 0;
-                assign IMMEDIATE = 3'b001;
+
+                //if immediate value set by memory unit by Funct3 ( byte, halfword, word, unsigned byte, unsigned halfword)
+                assign IMMEDIATE = 3'b001; 
+                // if immediate value set by immediate_extend module
+                // assign IMMEDIATE = FUNCT3; // case(FUNCT3)
                 // case(FUNCT3)
                 //     3'b000: assign IMMEDIATE = 3'b001;
                 //     3'b001: assign IMMEDIATE = 3'b001;
@@ -222,7 +226,7 @@ always @(INSTRUCTION) //Decoding the instruction
 
             // addi, slli, slti, sltiu, xori, srli, srai, ori, andi
             7'b0010011: begin
-                assign ALUOP = 5'b00000 + FUNCT3;
+                assign ALUOP = {5'b00, FUNCT3}; //extend Funct3 to 5 bits by adding 00 in the MSB
                 assign MUX1 = 1;
                 assign MUX2 = 0;
                 assign MUX3 = 0;
@@ -238,7 +242,7 @@ always @(INSTRUCTION) //Decoding the instruction
                     3'b010: assign IMMEDIATE = 3'b001;
                     3'b011: assign IMMEDIATE = 3'b001;
                     3'b100: assign IMMEDIATE = 3'b001;
-                    3'b101: assign IMMEDIATE = 3'b010;
+                    3'b101: assign IMMEDIATE = 3'b010; //srli, srai ( 30th bit is 0 for srli and 1 for srai instruction )
                     3'b110: assign IMMEDIATE = 3'b001;
                     3'b111: assign IMMEDIATE = 3'b001;
                 endcase
