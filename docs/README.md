@@ -24,7 +24,7 @@ This is a sample image, to show how to add images to your page. To learn more op
 
 ## Table of Contents
 1. [RV32IM Pipeline Processor Design](#RV32IM-Pipeline-Processor-Design)
-2. [Key Features of the RV32IM Processor](#Key-Features-of-the-RV32IM-Processorther)
+2. [Key Features of the RV32IM Processor](#key-Features-of-the-RV32IM-Processor)
 3. [Links](#links)
 
 ---
@@ -39,7 +39,7 @@ This design project enhances understanding of processor architecture, pipelining
 
 ## Key Features of the RV32IM Processor
 
-###1. Pipeline Stages:
+### Pipeline Stages:
 Instruction Fetch (IF)
 Instruction Decode (ID)
 Execute (EX)
@@ -47,23 +47,23 @@ Memory Access (MEM)
 Write Back (WB)
 The design ensures efficient instruction flow with minimized hazards and optimized performance.
 
-###2. Supported Instruction Set:
+### Supported Instruction Set:
 RV32I Base Instructions: Arithmetic, logical, control flow, and load/store operations.
 M Extension: Multiplication (MUL) and division (DIV) instructions.
 
-###3. Hazard Handling:
+### Hazard Handling:
 Data hazards: Managed through forwarding and stalling mechanisms.
 Control hazards: Addressed using branch prediction or static/dynamic strategies.
 
-###4. Performance Enhancements:
+### Performance Enhancements:
 Pipeline balancing to reduce cycle latency.
 Cache integration for faster memory access.
 
-###5. Simulation and Verification:
+### Simulation and Verification:
 Implemented using HDL (Verilog or VHDL).
 Verified using testbenches with RISC-V compliance tests and custom test cases.
 
-###6. Tools and Technologies:
+### Tools and Technologies:
 Hardware Description Language (HDL): Verilog/VHDL for processor implementation.
 Simulation Tools: ModelSim, Vivado, or equivalent.
 Synthesis Tools: FPGA tools like Quartus or Vivado for hardware prototyping.
