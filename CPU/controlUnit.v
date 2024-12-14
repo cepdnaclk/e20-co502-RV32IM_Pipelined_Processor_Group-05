@@ -46,54 +46,54 @@ R-type instructions
 
 I-type instructions
 
-    Instruction  OP-Code   Funct3  Funct7     ALUOP  MUX1  MUX2  MUX3 REGISTERWRITE MEMORYWRITE MEMORYREAD BRANCH  JUMP JAL  IMM
-    lb           0000011   000     0000000    10000    1     1     1    1             0           1          0      0    0   001
-    lh           0000011   001     0000000    10000    1     1     1    1             0           1          0      0    0   001
-    lw           0000011   010     0000000    10000    1     1     1    1             0           1          0      0    0   001
-    lbu          0000011   100     0000000    10000    1     1     1    1             0           1          0      0    0   001
-    lhu          0000011   101     0000000    10000    1     1     1    1             0           1          0      0    0   001
+    Instruction  OP-Code   Funct3  ALUOP  MUX1  MUX2  MUX3 REGISTERWRITE MEMORYWRITE MEMORYREAD BRANCH  JUMP JAL  IMM
+    lb           0000011   000     10000    1     1     1    1             0           1          0      0    0   001
+    lh           0000011   001     10000    1     1     1    1             0           1          0      0    0   001
+    lw           0000011   010     10000    1     1     1    1             0           1          0      0    0   001
+    lbu          0000011   100     10000    1     1     1    1             0           1          0      0    0   001
+    lhu          0000011   101     10000    1     1     1    1             0           1          0      0    0   001
     
-    addi         0010011   000     0000000    00000    1     0     0    1             0           0          0      0    0   001
-    slli         0010011   001     0000000    00001    1     0     0    1             0           0          0      0    0   010
-    slti         0010011   010     0000000    00010    1     0     0    1             0           0          0      0    0   010
-    sltiu        0010011   011     0000000    00011    1     0     0    1             0           0          0      0    0   010
-    xori         0010011   100     0000000    00100    1     0     0    1             0           0          0      0    0   001
-    srli         0010011   101     0000000    00101    1     0     0    1             0           0          0      0    0   010
-    srai         0010011   101     0000000    00101    1     0     0    1             0           0          0      0    0   010
-    ori          0010011   110     0000000    00110    1     0     0    1             0           0          0      0    0   001
-    andi         0010011   111     0000000    00111    1     0     0    1             0           0          0      0    0   001
+    addi         0010011   000     00000    1     0     0    1             0           0          0      0    0   001
+    slli         0010011   001     00001    1     0     0    1             0           0          0      0    0   001 
+    slti         0010011   010     00010    1     0     0    1             0           0          0      0    0   001 
+    sltiu        0010011   011     00011    1     0     0    1             0           0          0      0    0   001 
+    xori         0010011   100     00100    1     0     0    1             0           0          0      0    0   001
+    srli *       0010011   101     00101    1     0     0    1             0           0          0      0    0   010 *
+    srai *       0010011   101     00101    1     0     0    1             0           0          0      0    0   010 *
+    ori          0010011   110     00110    1     0     0    1             0           0          0      0    0   001
+    andi         0010011   111     00111    1     0     0    1             0           0          0      0    0   001
 
-    jalr         1100111   000     0000000    00000    0     0     0    1             0           0          0      0    0   001
+    jalr         1100111   000     00000    1     0     0    1             0           0          0      1    1   001
 
 S-type instructions
 
-    Instruction  OP-Code   Funct3  Funct7     ALUOP  MUX1  MUX2  MUX3 REGISTERWRITE MEMORYWRITE MEMORYREAD BRANCH  JUMP JAL  IMM
-    sb           0100011   000     0000000    00000    0     1     1    0             1           0          0      0    0   011
-    sh           0100011   001     0000000    00000    0     1     1    0             1           0          0      0    0   011
-    sw           0100011   010     0000000    00000    0     1     1    0             1           0          0      0    0   011
-    sbu          0100011   100     0000000    00000    0     1     1    0             1           0          0      0    0   011
-    shu          0100011   101     0000000    00000    0     1     1    0             1           0          0      0    0   011
+    Instruction  OP-Code   Funct3  ALUOP  MUX1  MUX2  MUX3 REGISTERWRITE MEMORYWRITE MEMORYREAD BRANCH  JUMP JAL  IMM
+    sb           0100011   000     00000    0     1     X    0             1           0          0      0    0   011
+    sh           0100011   001     00000    0     1     X    0             1           0          0      0    0   011
+    sw           0100011   010     00000    0     1     X    0             1           0          0      0    0   011
+    sbu          0100011   100     00000    0     1     X    0             1           0          0      0    0   011
+    shu          0100011   101     00000    0     1     X    0             1           0          0      0    0   011
 
 U-type instructions
 
-    Instruction  OP-Code   Funct3  Funct7     ALUOP  MUX1  MUX2  MUX3 REGISTERWRITE MEMORYWRITE MEMORYREAD BRANCH  JUMP JAL  IMM
-    auipc        0010111   000     0000000    00000    0     0     0    1             0           0          0      0    0   000
-    lui          0110111   000     0000000    00000    0     0     0    1             0           0          0      0    0   000
+    Instruction  OP-Code   ALUOP  MUX1  MUX2  MUX3 REGISTERWRITE MEMORYWRITE MEMORYREAD BRANCH  JUMP JAL  IMM
+    auipc        0010111   00000    0     0     0    1             0           0          0      0    0   000
+    lui          0110111   10000    0     0     0    1             0           0          0      0    0   000
 
 B-type instructions
 
-    Instruction  OP-Code   Funct3  Funct7     ALUOP  MUX1  MUX2  MUX3 REGISTERWRITE MEMORYWRITE MEMORYREAD BRANCH  JUMP JAL  IMM
-    beq          1100011   000     0000000    00000    0     0     0    0             0           0          1      1    0   100
-    bne          1100011   001     0000000    00000    0     0     0    0             0           0          1      1    0   100
-    blt          1100011   100     0000000    00000    0     0     0    0             0           0          1      1    0   100
-    bge          1100011   101     0000000    00000    0     0     0    0             0           0          1      1    0   100
-    bltu         1100011   110     0000000    00000    0     0     0    0             0           0          1      1    0   100
-    bgeu         1100011   111     0000000    00000    0     0     0    0             0           0          1      1    0   100
+    Instruction  OP-Code   Funct3  ALUOP  MUX1  MUX2  MUX3 REGISTERWRITE MEMORYWRITE MEMORYREAD BRANCH  JUMP JAL  IMM
+    beq          1100011   000     00000    0     0     0    0             0           0          1      0    0   100
+    bne          1100011   001     00000    0     0     0    0             0           0          1      0    0   100
+    blt          1100011   100     00000    0     0     0    0             0           0          1      0    0   100
+    bge          1100011   101     00000    0     0     0    0             0           0          1      0    0   100
+    bltu         1100011   110     00000    0     0     0    0             0           0          1      0    0   100
+    bgeu         1100011   111     00000    0     0     0    0             0           0          1      0    0   100
 
 J-type instructions
 
-    Instruction  OP-Code   Funct3  Funct7     ALUOP  MUX1  MUX2  MUX3 REGISTERWRITE MEMORYWRITE MEMORYREAD BRANCH  JUMP JAL  IMM
-    jal          1101111   000     0000000    00000    0     0     0    1             0           0          0      0    1   101
+    Instruction  OP-Code  ALUOP  MUX1  MUX2  MUX3 REGISTERWRITE MEMORYWRITE MEMORYREAD BRANCH  JUMP JAL  IMM
+    jal          1101111  00000    0     0     X    1             0           0          0      1    1   101
 
 */
 
