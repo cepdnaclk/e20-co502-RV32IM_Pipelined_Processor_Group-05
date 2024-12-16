@@ -3,17 +3,19 @@
 
     "team": [
         {
-            "name": "Ariyarathna D.B.S.",
+            "name": "Buddhika Ariyarathna",
             "email": "e20024@eng.pdn.ac.lk",
             "eNumber": "E/20/024"
         },
         {
-            "name": "Senavirathna A.P.B.P.",
+            "name": "Bhagya Senavirathna",
             "email": "e20366@eng.pdn.ac.lk",
-            "eNumber": "E/20/366"
+            "eNumber": "E/20/366",
+            "github": "https://github.com/bhagyaseela",
+            "linkedin": "https://www.linkedin.com/in/bhagya-senavirathna-bb0865227/"
         },
         {
-            "name": "Malinga G.A.I",
+            "name": "Imesha Malinga",
             "email": "e20242@eng.pdn.ac.lk",
             "eNumber": "E/20/242"
         }
