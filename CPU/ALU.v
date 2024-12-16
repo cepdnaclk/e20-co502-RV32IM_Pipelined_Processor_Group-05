@@ -211,8 +211,8 @@ always @(*) begin
         5'b01010: RESULT = Result_mulhsu;  // MULHSU
         5'b01011: RESULT = Result_mulhu;   // MULHU
         5'b01100: RESULT = Result_div;     // DIV
-        5'b01001: RESULT = Result_rem;     // REM
-        5'b10000: RESULT = Result_remu;    // REMU
+        5'b01101: RESULT = Result_rem;     // REM
+        5'b1111: RESULT = Result_remu;    // REMU
         default: RESULT = 32'b0;           // Default to 0 for undefined operations
     endcase
 
