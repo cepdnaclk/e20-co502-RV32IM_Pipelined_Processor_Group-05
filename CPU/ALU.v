@@ -8,13 +8,13 @@ assign #2 result=operand_A + operand_B;
 endmodule
 
 
-module SUB_module(operand_A,operand_B,result);
-input [31:0] operand_A;
-input [31:0] operand_B;
-output [31:0] result;
-assign #2 result=operand_A - operand_B;     
+// module SUB_module(operand_A,operand_B,result);
+// input [31:0] operand_A;
+// input [31:0] operand_B;
+// output [31:0] result;
+// assign #2 result=operand_A - operand_B;     
     
-endmodule
+// endmodule
 
 module SLL_module(operand_A,operand_B,result);
 input [31:0] operand_A;
@@ -59,14 +59,14 @@ assign #2 result=operand_A >> operand_B;
     
 endmodule
 
-module SRA_module(operand_A,operand_B,result);
-input [31:0] operand_A;
-input [31:0] operand_B;
-output [31:0] result;
+// module SRA_module(operand_A,operand_B,result);
+// input [31:0] operand_A;
+// input [31:0] operand_B;
+// output [31:0] result;
 
-assign #2 result=operand_A >>> operand_B;     
+// assign #2 result=operand_A >>> operand_B;     
     
-endmodule
+// endmodule
 
 module OR_module(operand_A,operand_B,result);
 input [31:0] operand_A;
@@ -197,13 +197,13 @@ REMU_module remu0(.operand_A(DATA1), .operand_B(DATA2), .result(Result_remu));
 always @(*) begin
     case (SELECT)
         5'b00000: RESULT = Result_add;     // ADD
-        5'b00001: RESULT = Result_sub;     // SUB
+        //5'b00001: RESULT = Result_sub;     // SUB
         5'b00010: RESULT = Result_sll;     // SLL
         5'b00011: RESULT = Result_slt;     // SLT
         5'b00100: RESULT = Result_sltu;    // SLTU
         5'b00101: RESULT = Result_xor;     // XOR
         5'b00110: RESULT = Result_srl;     // SRL
-        5'b00111: RESULT = Result_sra;     // SRA
+        //5'b00111: RESULT = Result_sra;     // SRA
         5'b01000: RESULT = Result_or;      // OR
         5'b01001: RESULT = Result_and;     // AND
         5'b01010: RESULT = Result_mul;     // MUL
