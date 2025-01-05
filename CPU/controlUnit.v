@@ -60,7 +60,7 @@
 
 
 
-    R-type instructions
+    R-type instructions 
 
         Instruction  OP-Code   Funct3  Funct7     ALUOP  MUX1  MUX2  MUX3 REGISTERWRITE MEMORYWRITE MEMORYREAD BRANCH  JUMP JAL  IMM
         add          0110011   000     0000000    00000    1     1     0    1             0           0          0      0    0   000

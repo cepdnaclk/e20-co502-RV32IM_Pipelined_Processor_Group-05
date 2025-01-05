@@ -176,13 +176,13 @@ wire [31:0] Result_div, Result_rem, Result_remu;
 
 // Instantiation of operation modules
 ADD_module add0(.operand_A(DATA1), .operand_B(DATA2), .result(Result_add));
-SUB_module sub0(.operand_A(DATA1), .operand_B(DATA2), .result(Result_sub));
+//SUB_module sub0(.operand_A(DATA1), .operand_B(DATA2), .result(Result_sub));
 SLL_module sll0(.operand_A(DATA1), .operand_B(DATA2), .result(Result_sll));
 SLT_module slt0(.operand_A(DATA1), .operand_B(DATA2), .result(Result_slt));
 SLTU_module sltu0(.operand_A(DATA1), .operand_B(DATA2), .result(Result_sltu));
 XOR_module xor0(.operand_A(DATA1), .operand_B(DATA2), .result(Result_xor));
 SRL_module srl0(.operand_A(DATA1), .operand_B(DATA2), .result(Result_srl));
-SRA_module sra0(.operand_A(DATA1), .operand_B(DATA2), .result(Result_sra));
+//SRA_module sra0(.operand_A(DATA1), .operand_B(DATA2), .result(Result_sra));
 OR_module or0(.operand_A(DATA1), .operand_B(DATA2), .result(Result_or));
 AND_module and0(.operand_A(DATA1), .operand_B(DATA2), .result(Result_and));
 MUL_module mul0(.operand_A(DATA1), .operand_B(DATA2), .result(Result_mul));
