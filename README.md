@@ -10,11 +10,13 @@ This is a sample image, to show how to add images to your page. To learn more op
 ![Sample Image](./images/sample.png)
  -->
 
-## Team
--  E/20/024, Ariyarathna D.B.S., [e20024@eng.pdn.ac.lk](e20024@eng.pdn.ac.lk)
--  E/20/242, Malinga G.A.I., [e20242@eng.pdn.ac.lk](e20242@eng.pdn.ac.lk)
--  E/20/366 , Seneviratne A.P.B.P., [e20366@eng.pdn.ac.lk](e20366@eng.pdn.ac.lk)
+### Team members
+-  E/20/024, Ariyarathna D.B.S., [e20024@eng.pdn.ac.lk]
+-  E/20/242, Malinga G.A.I., [e20242@eng.pdn.ac.lk]
+-  E/20/366 , Seneviratne A.P.B.P., [e20366@eng.pdn.ac.lk]
 
+### Supervisor
+- Dr. Isuru Nawinna , [isurunawinne@eng.pdn.ac.lk]
 ## Table of Contents
 1. [RV32IM Pipeline Processor Design](#RV32IM-Pipeline-Processor-Design)
 2. [Key Features of the RV32IM Processor](#key-Features-of-the-RV32IM-Processor)
