@@ -1,4 +1,4 @@
-module (CLK,RESET,BUSYWAIT,
+module EX_MEM(CLK,RESET,BUSYWAIT,
         MEM_WRITE_IN,MEM_READ_IN,MUX3_SELECT_IN,REGWRITE_ENABLE_IN,ALUUD_IN,DATA2_IN,FUNC3_IN,RD_IN,
         MEM_WRITE_OUT,MEM_READ_OUT,MUX3_SELECT_OUT,REGWRITE_ENABLE_OUT,ALUUD_OUT,DATA2_OUT,FUNC3_OUT,RD_OUT
         );
@@ -37,7 +37,14 @@ module (CLK,RESET,BUSYWAIT,
         else if (BUSYWAIT == 1'b0) begin
             #2
             MEM_READ_OUT <= MEM_READ_IN;
-            MEM_WRITE_OUT <= MEM_
-        end  
+            MEM_WRITE_OUT <= MEM_WRITE_IN;
+            MUX3_SELECT_OUT <= MUX3_SELECT_IN;
+            REGWRITE_ENABLE_OUT <= REGWRITE_ENABLE_IN;
+            ALUUD_OUT <= ALUUD_IN;
+            DATA2_OUT <= DATA2_IN;
+            FUNC3_OUT <= FUNC3_IN;
+            RD_OUT <= RD_IN;
+
+        end
     end
 endmodule
