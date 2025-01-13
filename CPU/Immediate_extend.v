@@ -9,13 +9,17 @@
     *  Purpose: This module is used to extend the immediate value to 32 bits.
     *  Functions: This module has the following functions:
     *             1. immediate_extend: This function extends the immediate value to 32 bits.
-    * Inputs: instruction[31:7]
+    * Inputs: imm_value[31:0], imm_select[2:0]
+    * Outputs: extended_imm_value[31:0]
+    * 1. immediate_extend: This function extends the immediate value to 32 bits.
+    * Inputs: imm_value[31:0], imm_select[2:0]
+    * imm_select is used to select the type of the instruction.
     * for I type : instruction[31:20]
-    * for R type : instruction[31:25] 
-    * for S type : instruction[31:25] & instruction[11:7]
-    * for B type : instruction[31] & instruction[7] & instruction[30:25] & instruction[11:8]
+    * for S type : instruction[31:25] and instruction[11:7]
+    * for B type : instruction[31], instruction[7], instruction[30:25], instruction[11:8]
+    * for J type : instruction[31], instruction[19:12], instruction[20], instruction[30:21]
     * for U type : instruction[31:12]
-    * for J type : instruction[31] & instruction[19:12] & instruction[20] & instruction[30:21]
+    * for I type srli/srai : instruction[31:20]
     * Outputs: imm_value[31:0]
 
 
@@ -31,6 +35,8 @@
         J-type              101
 
     *******************************************/
+    
+
 
 module immediate_extend(imm_value,extended_imm_value,imm_select);
 

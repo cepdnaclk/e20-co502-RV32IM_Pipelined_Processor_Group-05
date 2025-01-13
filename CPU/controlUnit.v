@@ -33,7 +33,7 @@
     ALUOP   Operation   Description
     00000   add         additon
     00001   sll         shift left logical
-    00010   slt         set less than
+    00010   slt         set less than 
     00011   sltu        set less than unsigned
     00100   xor         bitwise xor
     00101   srl         shift right logical
@@ -46,6 +46,9 @@
     01100   div         divide
     01101   rem         remainder
     01111   remu        remainder unsigned
+    10000               pass the value
+  * 10001   sub         subtraction
+  * 10010   sra         shift right arithmetic
 
     Immidiate values
 
@@ -122,10 +125,10 @@
         Instruction  OP-Code   Funct3  ALUOP  MUX1  MUX2  MUX3 REGISTERWRITE MEMORYWRITE MEMORYREAD BRANCH  JUMP JAL  IMM
         beq          1100011   000     00000    0     0     0    0             0           0          1      0    0   100
         bne          1100011   001     00000    0     0     0    0             0           0          1      0    0   100
-        blt          1100011   100     00000    0     0     0    0             0           0          1      0    0   100
-        bge          1100011   101     00000    0     0     0    0             0           0          1      0    0   100
-        bltu         1100011   110     00000    0     0     0    0             0           0          1      0    0   100
-        bgeu         1100011   111     00000    0     0     0    0             0           0          1      0    0   100
+        blt          1100011   100     00010    0     0     0    0             0           0          1      0    0   100
+        bge          1100011   101     00010    0     0     0    0             0           0          1      0    0   100
+        bltu         1100011   110     00011    0     0     0    0             0           0          1      0    0   100
+        bgeu         1100011   111     00011    0     0     0    0             0           0          1      0    0   100
 
     J-type instructions
 
