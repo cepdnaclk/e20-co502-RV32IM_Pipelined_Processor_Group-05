@@ -7,15 +7,6 @@ assign #2 result=operand_A + operand_B;
 
 endmodule
 
-
-// module SUB_module(operand_A,operand_B,result);
-// input [31:0] operand_A;
-// input [31:0] operand_B;
-// output [31:0] result;
-// assign #2 result=operand_A - operand_B;     
-    
-// endmodule
-
 module SLL_module(operand_A,operand_B,result);
 input [31:0] operand_A;
 input [31:0] operand_B;
@@ -58,15 +49,6 @@ output [31:0] result;
 assign #2 result=operand_A >> operand_B;     
     
 endmodule
-
-// module SRA_module(operand_A,operand_B,result);
-// input [31:0] operand_A;
-// input [31:0] operand_B;
-// output [31:0] result;
-
-// assign #2 result=operand_A >>> operand_B;     
-    
-// endmodule
 
 module OR_module(operand_A,operand_B,result);
 input [31:0] operand_A;

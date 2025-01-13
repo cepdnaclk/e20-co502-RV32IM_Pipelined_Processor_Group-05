@@ -45,6 +45,7 @@ module EX_MEM(CLK,RESET,BUSYWAIT,
             FUNC3_OUT <= FUNC3_IN;
             RD_OUT <= RD_IN;
 
-        end
+        end  
+
     end
 endmodule
