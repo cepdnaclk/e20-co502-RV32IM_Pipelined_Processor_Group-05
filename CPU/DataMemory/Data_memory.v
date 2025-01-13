@@ -85,13 +85,13 @@ module Data_Memory (
     end
 
     // Optionally, print memory values when a write or read occurs (for debugging)
-   // always @(posedge Clock) begin
-      //  if (write_access) begin
-           // $display("Writing data %h to Address %h", Write_data, Address);
-           // $display("Memory at Address %h: %h", Address, memory[Address[31:2]]);
-       // end
-       // if (read_access) begin
-       //     $display("Reading data from Address %h: %h", Address, Read_data);
-      //  end
-   // end
+    always @(posedge Clock) begin
+        if (write_access) begin
+            $display("Writing data %h to Address %h", Write_data, Address);
+            $display("Memory at Address %h: %h", Address, memory[Address[31:2]]);
+        end
+        if (read_access) begin
+            $display("Reading data from Address %h: %h", Address, Read_data);
+        end
+    end
 endmodule
