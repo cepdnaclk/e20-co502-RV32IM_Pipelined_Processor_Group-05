@@ -1,6 +1,7 @@
-module IF_ID(CLK,RESET,PC_PLUS_FOUR_IN,PC_IN,INSTRUCTION_IN,PC_PLUS_FOUR_OUT,PC_OUT,INSTRUCTION_OUT);
+module IF_ID(CLK,RESET,BUSYWAIT,PC_PLUS_FOUR_IN,PC_IN,INSTRUCTION_IN,PC_PLUS_FOUR_OUT,PC_OUT,INSTRUCTION_OUT);
     input CLK;
     input RESET;
+    input BUSYWAIT;
     input [31:0] PC_PLUS_FOUR_IN;
     input [31:0] PC_IN;
     input [31:0] INSTRUCTION_IN;
@@ -14,7 +15,7 @@ module IF_ID(CLK,RESET,PC_PLUS_FOUR_IN,PC_IN,INSTRUCTION_IN,PC_PLUS_FOUR_OUT,PC_
             PC_PLUS_FOUR_OUT=32'd0;
             INSTRUCTION_OUT=32'd0;    
         end 
-        else begin
+        else if (BUSYWAIT == 1'b0) begin
             #2
             INSTRUCTION_OUT <= INSTRUCTION_IN;
             PC_PLUS_FOUR_OUT <= PC_PLUS_FOUR_IN;
