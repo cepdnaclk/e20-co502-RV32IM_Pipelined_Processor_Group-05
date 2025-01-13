@@ -1,0 +1,114 @@
+#! /c/Source/iverilog-install/bin/vvp
+:ivl_version "12.0 (devel)" "(s20150603-1110-g18392a46)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "C:\iverilog\lib\ivl\system.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_sys.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_textio.vpi";
+:vpi_module "C:\iverilog\lib\ivl\v2005_math.vpi";
+:vpi_module "C:\iverilog\lib\ivl\va_math.vpi";
+S_0000023178f82df0 .scope module, "EX_MEM" "EX_MEM" 2 1;
+ .timescale 0 0;
+    .port_info 0 /INPUT 1 "CLK";
+    .port_info 1 /INPUT 1 "RESET";
+    .port_info 2 /INPUT 1 "BUSYWAIT";
+    .port_info 3 /INPUT 1 "MEM_WRITE_IN";
+    .port_info 4 /INPUT 1 "MEM_READ_IN";
+    .port_info 5 /INPUT 1 "MUX3_SELECT_IN";
+    .port_info 6 /INPUT 1 "REGWRITE_ENABLE_IN";
+    .port_info 7 /INPUT 32 "ALUUD_IN";
+    .port_info 8 /INPUT 32 "DATA2_IN";
+    .port_info 9 /INPUT 3 "FUNC3_IN";
+    .port_info 10 /INPUT 5 "RD_IN";
+    .port_info 11 /OUTPUT 1 "MEM_WRITE_OUT";
+    .port_info 12 /OUTPUT 1 "MEM_READ_OUT";
+    .port_info 13 /OUTPUT 1 "MUX3_SELECT_OUT";
+    .port_info 14 /OUTPUT 1 "REGWRITE_ENABLE_OUT";
+    .port_info 15 /OUTPUT 32 "ALUUD_OUT";
+    .port_info 16 /OUTPUT 32 "DATA2_OUT";
+    .port_info 17 /OUTPUT 3 "FUNC3_OUT";
+    .port_info 18 /OUTPUT 5 "RD_OUT";
+o0000023178fbcfa8 .functor BUFZ 32, C4<zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz>; HiZ drive
+v0000023178f830c0_0 .net "ALUUD_IN", 31 0, o0000023178fbcfa8;  0 drivers
+v0000023178f6b7f0_0 .var "ALUUD_OUT", 31 0;
+o0000023178fbd008 .functor BUFZ 1, C4<z>; HiZ drive
+v0000023178f6b890_0 .net "BUSYWAIT", 0 0, o0000023178fbd008;  0 drivers
+o0000023178fbd038 .functor BUFZ 1, C4<z>; HiZ drive
+v0000023178f6b930_0 .net "CLK", 0 0, o0000023178fbd038;  0 drivers
+o0000023178fbd068 .functor BUFZ 32, C4<zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz>; HiZ drive
+v0000023178f6b9d0_0 .net "DATA2_IN", 31 0, o0000023178fbd068;  0 drivers
+v0000023178f6ba70_0 .var "DATA2_OUT", 31 0;
+o0000023178fbd0c8 .functor BUFZ 3, C4<zzz>; HiZ drive
+v0000023178f6bb10_0 .net "FUNC3_IN", 2 0, o0000023178fbd0c8;  0 drivers
+v0000023178fb4ac0_0 .var "FUNC3_OUT", 2 0;
+o0000023178fbd128 .functor BUFZ 1, C4<z>; HiZ drive
+v0000023178fb4b60_0 .net "MEM_READ_IN", 0 0, o0000023178fbd128;  0 drivers
+v0000023178fb4c00_0 .var "MEM_READ_OUT", 0 0;
+o0000023178fbd188 .functor BUFZ 1, C4<z>; HiZ drive
+v0000023178fb4ca0_0 .net "MEM_WRITE_IN", 0 0, o0000023178fbd188;  0 drivers
+v0000023178fb4d40_0 .var "MEM_WRITE_OUT", 0 0;
+o0000023178fbd1e8 .functor BUFZ 1, C4<z>; HiZ drive
+v0000023178fb4de0_0 .net "MUX3_SELECT_IN", 0 0, o0000023178fbd1e8;  0 drivers
+v0000023178fb4e80_0 .var "MUX3_SELECT_OUT", 0 0;
+o0000023178fbd248 .functor BUFZ 5, C4<zzzzz>; HiZ drive
+v0000023178fb4f20_0 .net "RD_IN", 4 0, o0000023178fbd248;  0 drivers
+v0000023178ffe6a0_0 .var "RD_OUT", 4 0;
+o0000023178fbd2a8 .functor BUFZ 1, C4<z>; HiZ drive
+v0000023178ffe100_0 .net "REGWRITE_ENABLE_IN", 0 0, o0000023178fbd2a8;  0 drivers
+v0000023178ffe740_0 .var "REGWRITE_ENABLE_OUT", 0 0;
+o0000023178fbd308 .functor BUFZ 1, C4<z>; HiZ drive
+v0000023178ffe1a0_0 .net "RESET", 0 0, o0000023178fbd308;  0 drivers
+E_0000023178fb8580 .event posedge, v0000023178f6b930_0;
+    .scope S_0000023178f82df0;
+T_0 ;
+    %wait E_0000023178fb8580;
+    %load/vec4 v0000023178ffe1a0_0;
+    %cmpi/e 1, 0, 1;
+    %jmp/0xz  T_0.0, 4;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0000023178fb4c00_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0000023178fb4c00_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0000023178fb4e80_0, 0, 1;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0000023178ffe740_0, 0, 1;
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v0000023178f6b7f0_0, 0, 32;
+    %pushi/vec4 0, 0, 32;
+    %store/vec4 v0000023178f6ba70_0, 0, 32;
+    %pushi/vec4 0, 0, 3;
+    %store/vec4 v0000023178fb4ac0_0, 0, 3;
+    %pushi/vec4 0, 0, 5;
+    %store/vec4 v0000023178ffe6a0_0, 0, 5;
+    %jmp T_0.1;
+T_0.0 ;
+    %load/vec4 v0000023178f6b890_0;
+    %cmpi/e 0, 0, 1;
+    %jmp/0xz  T_0.2, 4;
+    %delay 2, 0;
+    %load/vec4 v0000023178fb4b60_0;
+    %assign/vec4 v0000023178fb4c00_0, 0;
+    %load/vec4 v0000023178fb4ca0_0;
+    %assign/vec4 v0000023178fb4d40_0, 0;
+    %load/vec4 v0000023178fb4de0_0;
+    %assign/vec4 v0000023178fb4e80_0, 0;
+    %load/vec4 v0000023178ffe100_0;
+    %assign/vec4 v0000023178ffe740_0, 0;
+    %load/vec4 v0000023178f830c0_0;
+    %assign/vec4 v0000023178f6b7f0_0, 0;
+    %load/vec4 v0000023178f6b9d0_0;
+    %assign/vec4 v0000023178f6ba70_0, 0;
+    %load/vec4 v0000023178f6bb10_0;
+    %assign/vec4 v0000023178fb4ac0_0, 0;
+    %load/vec4 v0000023178fb4f20_0;
+    %assign/vec4 v0000023178ffe6a0_0, 0;
+T_0.2 ;
+T_0.1 ;
+    %jmp T_0;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 3;
+    "N/A";
+    "<interactive>";
+    "EX_MEM.v";
