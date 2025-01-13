@@ -10,52 +10,44 @@
     *
 ******************************************************/
 
-module Register_file(ADRS1,ADRS2,WRITE_ENABLE,WRITE_DATA,WB_ADDRESS,DATA1,DATA2,CLK,RESET,DATA_OUT1,DATA_OUT2);
+module Register_file(
+    input [4:0] ADRS1,
+    input [4:0] ADRS2,
+    input [4:0] WB_ADDRESS,
+    input WRITE_ENABLE,
+    input [31:0] WRITE_DATA,
+    input CLK,
+    input RESET,
+    output [31:0] DATA_OUT1,
+    output [31:0] DATA_OUT2
+);
 
-    // Inputs
-    input [4:0] ADRS1,ADRS2,WB_ADDRESS;
-    input WRITE_ENABLE;
-    input [31:0] WRITE_DATA;
-    input CLK,RESET;
+    // Internal Registers
+    reg [31:0] REGISTER_FILE [31:0]; // 32 registers each of 32 bits
+    reg [31:0] DATA1, DATA2; // Temporary storage for output data
 
-    // Outputs
-    output [31:0] DATA_OUT1,DATA_OUT2;// Outputs
-    reg [31:0] DATA_OUT1,DATA_OUT2; // Internal Registers
-    reg [31:0] DATA1,DATA2;// Internal Registers
-
-    // create space for Internal Registers 32X32 bits
-    // 32 registers each of 32 bits
-    reg [31:0] REGISTER_FILE [31:0];
-
-    // Register File
     integer i;
-    
-    always @(posedge CLK or posedge RESET)
-    begin
-        // Reset the Register File
-        if(RESET)
-        begin
-            for(i=0;i<32;i=i+1)
-            begin
+
+    // Synchronous logic with reset
+    always @(posedge CLK or posedge RESET) begin
+        if (RESET) begin
+            // Reset all registers
+            for (i = 0; i < 32; i = i + 1) begin
                 REGISTER_FILE[i] <= 0;
             end
-        end
-
-        // Read and Write Operations
-        else
-        begin
-            if(WRITE_ENABLE)
-            begin
-                // Write Data to the Register File
-                REGISTER_FILE[WB_ADDRESS] <= WRITE_DATA;
-            end
-            // Read Data from the Register File
-            DATA1 <= REGISTER_FILE[ADRS1];
-            DATA2 <= REGISTER_FILE[ADRS2];
+        end else if (WRITE_ENABLE) begin
+            // Write data to register
+            REGISTER_FILE[WB_ADDRESS] <= WRITE_DATA;
         end
     end
-    
-    // Output
+
+    // Read data from registers
+    always @(*) begin
+        DATA1 = REGISTER_FILE[ADRS1];
+        DATA2 = REGISTER_FILE[ADRS2];
+    end
+
+    // Assign outputs
     assign DATA_OUT1 = DATA1;
     assign DATA_OUT2 = DATA2;
 
