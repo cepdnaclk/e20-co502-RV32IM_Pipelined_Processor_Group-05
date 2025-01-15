@@ -108,11 +108,11 @@
     S-type instructions
 
         Instruction  OP-Code   Funct3  ALUOP  MUX1  MUX2  MUX3 REGISTERWRITE MEMORYWRITE MEMORYREAD BRANCH  JUMP JAL  IMM TWOSCOMP
-        sb           0100011   000     00000    0     1     X    0             1           0          0      0    0   011  0
-        sh           0100011   001     00000    0     1     X    0             1           0          0      0    0   011  0
-        sw           0100011   010     00000    0     1     X    0             1           0          0      0    0   011  0
-        sbu          0100011   100     00000    0     1     X    0             1           0          0      0    0   011  0
-        shu          0100011   101     00000    0     1     X    0             1           0          0      0    0   011  0
+        sb           0100011   000     00000    1     1     X    0             1           0          0      0    0   011  0
+        sh           0100011   001     00000    1     1     X    0             1           0          0      0    0   011  0
+        sw           0100011   010     00000    1     1     X    0             1           0          0      0    0   011  0
+        sbu          0100011   100     00000    1     1     X    0             1           0          0      0    0   011  0
+        shu          0100011   101     00000    1     1     X    0             1           0          0      0    0   011  0
 
     U-type instructions
 
@@ -123,12 +123,12 @@
     B-type instructions
 
         Instruction  OP-Code   Funct3  ALUOP  MUX1  MUX2  MUX3 REGISTERWRITE MEMORYWRITE MEMORYREAD BRANCH  JUMP JAL  IMM  TWOSCOMP
-        beq          1100011   000     00000    0     0     0    0             0           0          1      0    0   100  1 
-        bne          1100011   001     00000    0     0     0    0             0           0          1      0    0   100  1
-        blt          1100011   100     00010    0     0     0    0             0           0          1      0    0   100  0
-        bge          1100011   101     00010    0     0     0    0             0           0          1      0    0   100  0
-        bltu         1100011   110     00011    0     0     0    0             0           0          1      0    0   100  0
-        bgeu         1100011   111     00011    0     0     0    0             0           0          1      0    0   100  0
+        beq          1100011   000     00000    1     0     0    0             0           0          1      0    0   100  1 
+        bne          1100011   001     00000    1     0     0    0             0           0          1      0    0   100  1
+        blt          1100011   100     00010    1     0     0    0             0           0          1      0    0   100  0
+        bge          1100011   101     00010    1     0     0    0             0           0          1      0    0   100  0
+        bltu         1100011   110     00011    1     0     0    0             0           0          1      0    0   100  0
+        bgeu         1100011   111     00011    1     0     0    0             0           0          1      0    0   100  0
 
     J-type instructions
 
@@ -313,7 +313,7 @@ always @(INSTRUCTION) //Decoding the instruction
             // sb, sh, sw, sbu, shu
             7'b0100011: begin
                 assign ALUOP = 5'b00000;
-                assign MUX1 = 0;
+                assign MUX1 = 1;
                 assign MUX2 = 1;
                 assign MUX3 = 0;
                 assign REGISTERWRITE = 0;
@@ -372,7 +372,7 @@ always @(INSTRUCTION) //Decoding the instruction
                     3'b110: assign ALUOP = 5'b00011;
                     3'b111: assign ALUOP = 5'b00011;
                 endcase
-                assign MUX1 = 0;
+                assign MUX1 = 1;
                 assign MUX2 = 0;
                 assign MUX3 = 0;
                 assign REGISTERWRITE = 0;
