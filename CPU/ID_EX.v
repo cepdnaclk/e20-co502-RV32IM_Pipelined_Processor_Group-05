@@ -11,9 +11,9 @@ module ID_EX(CLK,RESET,BUSYWAIT,
     input [31:0] DATA1_IN;
     input [31:0] DATA2_IN;
     input [2:0] FUNC3_IN;
-    input [4:1] RD_IN;
+    input [4:0] RD_IN;
 
-    input [4:1] ALU_IN;
+    input [4:0] ALU_IN;
     input  MUX1_IN;
     input  MUX2_IN;
     input  MUX3_IN;
@@ -31,9 +31,9 @@ module ID_EX(CLK,RESET,BUSYWAIT,
     output reg [31:0] DATA1_OUT;
     output reg [31:0] DATA2_OUT;
     output reg [2:0] FUNC3_OUT;
-    output reg [4:1] RD_OUT;
+    output reg [4:0] RD_OUT;
 
-    output reg [4:1] ALU_OUT;
+    output reg [4:0] ALU_OUT;
     output reg MUX1_OUT;
     output reg MUX2_OUT;
     output reg MUX3_OUT;
