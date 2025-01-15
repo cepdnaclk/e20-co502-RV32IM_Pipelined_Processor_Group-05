@@ -1,3 +1,5 @@
+`timescale 1ns/100ps
+
 module mux_4x1_32bit(IN0, IN1, IN2, IN3, OUT, SELECT);
 
     //declare the ports

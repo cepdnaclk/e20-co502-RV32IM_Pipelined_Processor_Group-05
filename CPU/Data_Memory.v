@@ -7,7 +7,7 @@
 
 
 
-//`timescale 1ns/100ps
+`timescale 1ns/100ps
 // Data Memory Module
 module Data_Memory (
     input               Read,         // Memory read signal

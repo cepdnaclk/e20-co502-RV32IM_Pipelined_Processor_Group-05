@@ -1,3 +1,5 @@
+    `timescale 1ns/100ps
+    
     /******************************************
     *  Author : Senavirathna A.P.B.P.
     *  Created On : 2024-12-13
