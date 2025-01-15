@@ -31,7 +31,8 @@ mux_2x1_32bit u_mux_2x1_32bit (
 always @(posedge clock or posedge reset) begin
     if (reset) begin
         pc <= 32'd0; // Reset PC to 0
-    end else begin
+    end 
+    else begin
         pc <= next_pc; // Update PC based on MUX output
     end
 end
