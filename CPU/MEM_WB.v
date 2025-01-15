@@ -10,11 +10,11 @@ module MEM_WB( CLK,RESET,BUSYWAIT,
     input [31:0] ALUOUT_IN;
     input [31:0] MEM_IN;
     input [4:0] RD_IN;
-    output MUX3_SELECT_OUT;
-    output REGWRITE_ENABLE_OUT;
-    output [31:0] ALUOUT_OUT;
-    output [31:0] MEM_OUT;
-    output [4:0] RD_OUT;
+    output reg MUX3_SELECT_OUT;
+    output reg REGWRITE_ENABLE_OUT;
+    output reg [31:0] ALUOUT_OUT;
+    output reg [31:0] MEM_OUT;
+    output reg [4:0] RD_OUT;
 
     always @(posedge CLK) begin
         if (RESET==1'b1) begin
