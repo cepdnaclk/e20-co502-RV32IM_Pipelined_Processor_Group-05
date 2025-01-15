@@ -1,4 +1,4 @@
-    `timescale 1ns/100ps
+`timescale 1ns/100ps
     
     /******************************************
     *  Author : Senavirathna A.P.B.P.
@@ -147,7 +147,7 @@ module controlUnit(INSTRUCTION, MUX1, MUX2, MUX3, ALUOP,REGISTERWRITE, MEMORYWRI
     reg [6:0] FUNCT7;
 
     output reg MUX1, MUX2 , MUX3, REGISTERWRITE, MEMORYWRITE, MEMORYREAD, BRANCH, JUMP, JAL, TWOSCOMP;
-    output reg  [4:0] ALUOP;
+    output reg [4:0] ALUOP;
     output reg [2:0] IMMEDIATE;
     
 
@@ -166,13 +166,23 @@ always @(INSTRUCTION) //Decoding the instruction
         // R-type instructions
 
             7'b0110011: begin
-                case(FUNCT3)
-                    3'b000: begin
+                
                         case(FUNCT7)
 
                             // add, sll, slt, sltu, xor, or, and
                             7'b0000000: begin
-                                assign ALUOP = {2'b00, FUNCT3}; //extend Funct3 to 5 bits by adding 00 in the MSB
+                                // assign ALUOP = {2'b00, FUNCT3}; //extend Funct3 to 5 bits by adding 00 in the MSB
+                                // assign ALUOP = 5'b00_000 ;
+                                case(FUNCT3)
+                                    3'b000 : assign ALUOP = 5'b00000;
+                                    3'b001 : assign ALUOP = 5'b00001;
+                                    3'b010 : assign ALUOP = 5'b00010;
+                                    3'b011 : assign ALUOP = 5'b00011;
+                                    3'b100 : assign ALUOP = 5'b00100;
+                                    3'b101 : assign ALUOP = 5'b00101;
+                                    3'b110 : assign ALUOP = 5'b00110;
+                                    3'b111 : assign ALUOP = 5'b00111;
+                                endcase
                                 assign MUX1 = 1;
                                 assign MUX2 = 1;
                                 assign MUX3 = 0;
@@ -188,7 +198,11 @@ always @(INSTRUCTION) //Decoding the instruction
 
                             // sub, sra
                             7'b0100000: begin
-                                assign ALUOP = {2'b00, FUNCT3}; //extend Funct3 to 5 bits by adding 00 in the MSB
+                                // assign ALUOP = {2'b00, FUNCT3}; //extend Funct3 to 5 bits by adding 00 in the MSB
+                                case(FUNCT3)
+                                    3'b000 : assign ALUOP = 5'b00000;
+                                    3'b101 : assign ALUOP = 5'b00101;
+                                endcase
                                 assign MUX1 = 1;
                                 assign MUX2 = 1;
                                 assign MUX3 = 0;
@@ -204,7 +218,16 @@ always @(INSTRUCTION) //Decoding the instruction
 
                             // mul, mulh, mulhsu, mulhu, div, rem, remu
                             7'b0111011: begin
-                                assign ALUOP = {2'b01, FUNCT3}; //extend Funct3 to 5 bits by adding 01 in the MSB
+                                // assign ALUOP = {2'b01, FUNCT3}; //extend Funct3 to 5 bits by adding 01 in the MSB
+                                case(FUNCT3)
+                                    3'b000 : assign ALUOP = 5'b01000;
+                                    3'b001 : assign ALUOP = 5'b01001;
+                                    3'b010 : assign ALUOP = 5'b01010;
+                                    3'b011 : assign ALUOP = 5'b01011;
+                                    3'b100 : assign ALUOP = 5'b01100;
+                                    3'b110 : assign ALUOP = 5'b01101;
+                                    3'b111 : assign ALUOP = 5'b01111;
+                                endcase
                                 assign MUX1 = 1;
                                 assign MUX2 = 1;
                                 assign MUX3 = 0;
@@ -218,8 +241,7 @@ always @(INSTRUCTION) //Decoding the instruction
                                 assign TWOSCOMP = 0;
                             end
                         endcase
-                    end
-                    endcase
+                    
             end
 
         // I-type instructions
@@ -255,7 +277,17 @@ always @(INSTRUCTION) //Decoding the instruction
 
             // addi, slli, slti, sltiu, xori, srli, srai, ori, andi
             7'b0010011: begin
-                assign ALUOP = {2'b00, FUNCT3}; //extend Funct3 to 5 bits by adding 00 in the MSB
+                // assign ALUOP = {2'b00, FUNCT3}; //extend Funct3 to 5 bits by adding 00 in the MSB
+                case(FUNCT3)
+                    3'b000 : assign ALUOP = 5'b00000;
+                    3'b001 : assign ALUOP = 5'b00001;
+                    3'b010 : assign ALUOP = 5'b00010;
+                    3'b011 : assign ALUOP = 5'b00011;
+                    3'b100 : assign ALUOP = 5'b00100;
+                    3'b101 : assign ALUOP = 5'b00101;
+                    3'b110 : assign ALUOP = 5'b00110;
+                    3'b111 : assign ALUOP = 5'b00111;
+                endcase
                 assign MUX1 = 1;
                 assign MUX2 = 0;
                 assign MUX3 = 0;
