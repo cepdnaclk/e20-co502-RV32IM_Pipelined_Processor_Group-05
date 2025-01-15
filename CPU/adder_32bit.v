@@ -1,3 +1,5 @@
+`timescale 1ns/100ps
+
 module adder_32bit(IN1, OUT);
 
     //declare ports

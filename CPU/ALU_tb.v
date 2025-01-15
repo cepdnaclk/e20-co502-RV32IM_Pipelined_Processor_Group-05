@@ -1,5 +1,6 @@
-`include "ALU.v"
+`timescale 1ns/100ps
 
+`include "ALU.v"
 module ALU_tb;
 
 

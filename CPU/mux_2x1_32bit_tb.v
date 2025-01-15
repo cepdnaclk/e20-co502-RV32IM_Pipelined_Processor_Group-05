@@ -1,3 +1,5 @@
+`timescale 1ns/100ps
+
 `include "mux_2x1_32bit.v"
 module mux_2x1_32bit_tb;
 

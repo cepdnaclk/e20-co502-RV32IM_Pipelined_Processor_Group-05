@@ -1,3 +1,4 @@
+`timescale 1ns/100ps
     /******************************************
     *  Author : Ariyarathna D.B.S
     *  Created On : 2024-12-14

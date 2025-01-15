@@ -1,3 +1,5 @@
+`timescale 1ns/100ps
+
 // Addition module: adds operand_A and operand_B, result2 gets updated after a delay of 2 time units
 module ADD_module(operand_A,operand_B,result);
 input [31:0] operand_A;
@@ -140,7 +142,7 @@ assign #2 result=operand_A % operand_B;
 endmodule
 
 
-module alu(DATA1, DATA2, SELECT, RESULT, ZERO);  // ALU module declaration
+module ALU(DATA1, DATA2, SELECT, RESULT, ZERO);  // ALU module declaration
 
 // Input port declaration
 input [31:0] DATA1, DATA2;  // Two 32-bit input data

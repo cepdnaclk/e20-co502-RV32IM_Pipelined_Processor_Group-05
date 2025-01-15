@@ -1,30 +1,18 @@
-/*****************************************************
-    * Module: Register_file
-    *
-    * Purpose: This module is used to implement the register file
-    *          for the CPU.
-    *
-    * Functions: This module has the following functions:
-    *            1. Read: This function reads the data from the register file.
-    *            2. Write: This function writes the data to the register file.
-    *
-******************************************************/
-
 module Register_file(
-    input [4:0] ADRS1,
-    input [4:0] ADRS2,
-    input [4:0] WB_ADDRESS,
-    input WRITE_ENABLE,
-    input [31:0] WRITE_DATA,
-    input CLK,
-    input RESET,
-    output [31:0] DATA_OUT1,
-    output [31:0] DATA_OUT2
+    input [4:0] ADRS1,            // Address of the first register
+    input [4:0] ADRS2,            // Address of the second register
+    input [4:0] WB_ADDRESS,       // Writeback register address
+    input WRITE_ENABLE,           // Write enable signal
+    input [31:0] WRITE_DATA,      // Data to be written to the register
+    input CLK,                    // Clock signal
+    input RESET,                  // Reset signal
+    output [31:0] DATA_OUT1,      // Data from register 1
+    output [31:0] DATA_OUT2       // Data from register 2
 );
 
     // Internal Registers
-    reg [31:0] REGISTER_FILE [31:0]; // 32 registers each of 32 bits
-    reg [31:0] DATA1, DATA2; // Temporary storage for output data
+    reg [31:0] REGISTER_FILE [31:0]; // 32 registers, each 32 bits wide
+    reg [31:0] DATA1, DATA2; // Temporary storage for read data
 
     integer i;
 
@@ -41,7 +29,7 @@ module Register_file(
         end
     end
 
-    // Read data from registers
+    // Read data from registers (combinational)
     always @(*) begin
         DATA1 = REGISTER_FILE[ADRS1];
         DATA2 = REGISTER_FILE[ADRS2];

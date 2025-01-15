@@ -1,3 +1,5 @@
+`timescale 1ns/100ps
+
 `include "ALU.v"
 `include "controlUnit.v"
 `include "immediate_extend.v"
