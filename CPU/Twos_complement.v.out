@@ -1,0 +1,43 @@
+#! /c/Source/iverilog-install/bin/vvp
+:ivl_version "12.0 (devel)" "(s20150603-1110-g18392a46)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "C:\iverilog\lib\ivl\system.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_sys.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_textio.vpi";
+:vpi_module "C:\iverilog\lib\ivl\v2005_math.vpi";
+:vpi_module "C:\iverilog\lib\ivl\va_math.vpi";
+S_00000267c6152db0 .scope module, "twos_complement_selector" "twos_complement_selector" 2 6;
+ .timescale 0 0;
+    .port_info 0 /INPUT 32 "DATA2";
+    .port_info 1 /INPUT 1 "select";
+    .port_info 2 /OUTPUT 32 "DATA2_OUT";
+o00000267c6186fb8 .functor BUFZ 32, C4<zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz>; HiZ drive
+v00000267c61535a0_0 .net "DATA2", 31 0, o00000267c6186fb8;  0 drivers
+v00000267c6152f40_0 .var "DATA2_OUT", 31 0;
+o00000267c6187018 .functor BUFZ 1, C4<z>; HiZ drive
+v00000267c6152fe0_0 .net "select", 0 0, o00000267c6187018;  0 drivers
+E_00000267c6185990 .event anyedge, v00000267c6152fe0_0, v00000267c61535a0_0;
+    .scope S_00000267c6152db0;
+T_0 ;
+    %wait E_00000267c6185990;
+    %load/vec4 v00000267c6152fe0_0;
+    %pad/u 32;
+    %cmpi/e 1, 0, 32;
+    %jmp/0xz  T_0.0, 4;
+    %load/vec4 v00000267c61535a0_0;
+    %inv;
+    %addi 1, 0, 32;
+    %store/vec4 v00000267c6152f40_0, 0, 32;
+    %jmp T_0.1;
+T_0.0 ;
+    %load/vec4 v00000267c61535a0_0;
+    %store/vec4 v00000267c6152f40_0, 0, 32;
+T_0.1 ;
+    %jmp T_0;
+    .thread T_0, $push;
+# The file index is used to find the file name in the following table.
+:file_names 3;
+    "N/A";
+    "<interactive>";
+    "Twos_complement.v";

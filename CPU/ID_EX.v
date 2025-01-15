@@ -1,4 +1,9 @@
-module ID_EX(CLK,RESET,BUSYWAIT,PC_PLUS_FOUR_IN,PC_IN,IMM_IN,DATA1_IN,DATA2_IN,FUNC3_IN,RD_IN,ALU_IN,MUX1_IN,MUX2_IN,MUX3_IN,REGWRITE_IN,MEMWRITE_IN,MEMREAD_IN,BRANCH_IN,JUMP_IN,JAL_IN,PC_PLUS_FOUR_OUT,PC_OUT,IMM_OUT,,ALU_OUT,MUX1_OUT,MUX2_OUT,MUX3_OUT,REGWRITE_OUT,MEMWRITE_OUT,MEMREAD_OUT,BRANCH_OUT,JUMP_OUT,JAL_OUT,DATA1_OUT,DATA2_OUT,FUNC3_OUT,RD_OUT);
+
+module ID_EX(CLK,RESET,BUSYWAIT,
+            PC_PLUS_FOUR_IN,PC_IN,IMM_IN,DATA1_IN,DATA2_IN,FUNC3_IN,RD_IN,ALU_IN,MUX1_IN,MUX2_IN,MUX3_IN,REGWRITE_IN,MEMWRITE_IN,MEMREAD_IN,BRANCH_IN,JUMP_IN,JAL_IN,TWOSCOMP_IN,
+            PC_PLUS_FOUR_OUT,PC_OUT,IMM_OUT,ALU_OUT,MUX1_OUT,MUX2_OUT,MUX3_OUT,REGWRITE_OUT,MEMWRITE_OUT,MEMREAD_OUT,BRANCH_OUT,JUMP_OUT,JAL_OUT,TWOSCOMP_OUT,DATA1_OUT,DATA2_OUT,FUNC3_OUT,RD_OUT);
+
+
     input CLK;
     input RESET;
     input BUSYWAIT;
@@ -8,9 +13,9 @@ module ID_EX(CLK,RESET,BUSYWAIT,PC_PLUS_FOUR_IN,PC_IN,IMM_IN,DATA1_IN,DATA2_IN,F
     input [31:0] DATA1_IN;
     input [31:0] DATA2_IN;
     input [2:0] FUNC3_IN;
-    input [4:1] RD_IN;
+    input [4:1] RD_IN;   //[4:0]???
 
-    input [4:1] ALU_IN;
+    input [4:1] ALU_IN;  // [4:0]???
     input  MUX1_IN;
     input  MUX2_IN;
     input  MUX3_IN;
@@ -20,6 +25,7 @@ module ID_EX(CLK,RESET,BUSYWAIT,PC_PLUS_FOUR_IN,PC_IN,IMM_IN,DATA1_IN,DATA2_IN,F
     input  BRANCH_IN;
     input  JUMP_IN;
     input  JAL_IN;
+    input  TWOSCOMP_IN;
     
     output reg [31:0] PC_PLUS_FOUR_OUT;
     output reg [31:0] PC_OUT;
@@ -27,9 +33,9 @@ module ID_EX(CLK,RESET,BUSYWAIT,PC_PLUS_FOUR_IN,PC_IN,IMM_IN,DATA1_IN,DATA2_IN,F
     output reg [31:0] DATA1_OUT;
     output reg [31:0] DATA2_OUT;
     output reg [2:0] FUNC3_OUT;
-    output reg [4:1] RD_OUT;
+    output reg [4:1] RD_OUT;   //[4:0]???
 
-    output reg [4:1] ALU_OUT;
+    output reg [4:1] ALU_OUT;  // [4:0]???
     output reg MUX1_OUT;
     output reg MUX2_OUT;
     output reg MUX3_OUT;
@@ -39,6 +45,7 @@ module ID_EX(CLK,RESET,BUSYWAIT,PC_PLUS_FOUR_IN,PC_IN,IMM_IN,DATA1_IN,DATA2_IN,F
     output reg BRANCH_OUT;
     output reg JUMP_OUT;
     output reg JAL_OUT;
+    output reg TWOSCOMP_OUT;
     
 
     always @(posedge CLK) begin
@@ -60,6 +67,7 @@ module ID_EX(CLK,RESET,BUSYWAIT,PC_PLUS_FOUR_IN,PC_IN,IMM_IN,DATA1_IN,DATA2_IN,F
             BRANCH_OUT=1'b0;
             JUMP_OUT=1'b0;
             JAL_OUT=1'b0;
+            TWOSCOMP_OUT=1'b0;
 
         end 
         else begin
@@ -81,6 +89,7 @@ module ID_EX(CLK,RESET,BUSYWAIT,PC_PLUS_FOUR_IN,PC_IN,IMM_IN,DATA1_IN,DATA2_IN,F
             BRANCH_OUT <= BRANCH_IN;
             JUMP_OUT <= JUMP_IN;
             JAL_OUT <= JAL_IN;
+            TWOSCOMP_OUT <= TWOSCOMP_IN;
 
         end   
     end
