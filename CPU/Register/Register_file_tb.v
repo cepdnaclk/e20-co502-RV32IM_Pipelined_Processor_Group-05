@@ -1,6 +1,7 @@
 /*******************************************
     * Testbench for the Register File
 *******************************************/
+`include "Register_file.v"
 
 module Register_file_tb;
 

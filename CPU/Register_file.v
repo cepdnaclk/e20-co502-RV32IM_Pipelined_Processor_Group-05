@@ -12,19 +12,20 @@ module Register_file(
 
     // Internal Registers
     reg [31:0] REGISTER_FILE [31:0]; // 32 registers, each 32 bits wide
-    reg [31:0] DATA1, DATA2; // Temporary storage for read data
+    reg [31:0] DATA1, DATA2;         // Temporary storage for read data
 
     integer i;
 
+
     // Synchronous logic with reset
-    always @(posedge CLK or posedge RESET) begin
+    always @(posedge CLK ) begin
         if (RESET) begin
-            // Reset all registers
+            // Reset all registers to zero
             for (i = 0; i < 32; i = i + 1) begin
-                REGISTER_FILE[i] <= 0;
+                REGISTER_FILE[i] <= i;
             end
         end else if (WRITE_ENABLE) begin
-            // Write data to register
+            // Write data to the specified register
             REGISTER_FILE[WB_ADDRESS] <= WRITE_DATA;
         end
     end
@@ -40,3 +41,4 @@ module Register_file(
     assign DATA_OUT2 = DATA2;
 
 endmodule
+

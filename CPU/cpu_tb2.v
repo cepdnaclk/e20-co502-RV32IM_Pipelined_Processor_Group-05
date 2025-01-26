@@ -1,17 +1,15 @@
 `timescale 1ns/100ps
+`include "CPU.v"
 
-`include "cpu.v"
-
-module CPU_tb();
-    reg [31:0] PC;
-    reg [31:0] INSTRUCTION;
+module CPU_tb;
     reg CLK, RESET;
-    reg [31:0] READ_DATA;
+    reg BUSYWAIT;
+    reg [31:0] PC, INSTRUCTION, READ_DATA;
     wire MEM_READ, MEM_WRITE;
     wire [31:0] MEM_WRITE_DATA, MEM_ADDRESS;
 
     // Instantiate the CPU module
-    CPU cpu(PC, INSTRUCTION, CLK, RESET, READ_DATA, MEM_READ, MEM_WRITE, MEM_WRITE_DATA, MEM_ADDRESS);
+    CPU cpu(PC, INSTRUCTION, CLK, RESET, READ_DATA, BUSYWAIT,MEM_READ, MEM_WRITE, MEM_WRITE_DATA, MEM_ADDRESS);
 
     // Clock generation
     initial begin
@@ -19,34 +17,38 @@ module CPU_tb();
         forever #5 CLK = ~CLK; // 10ns clock period
     end
 
-    // Testbench logic
+    // Test case
     initial begin
-        // Initialize inputs
-        PC = 0;
+        // Initialize signals
         RESET = 1;
-        READ_DATA = 0;
-
-        // Apply reset
+        PC = 32'h00000000;
+        INSTRUCTION = 32'h00000000;
+        READ_DATA = 32'h00000000;
+        BUSYWAIT = 0;
+        
+        // Reset the CPU
         #10 RESET = 0;
 
-        // Test Case 1: ADD instruction (R-type)
-        INSTRUCTION = 32'b0000000_00010_00001_000_00011_0110011; // ADD x3, x1, x2
-        #10;
+        // Test ADD instruction: add x1, x2, x3 (Assume opcode and format are correct)
+        #10 PC = 32'h00000004; INSTRUCTION = 32'b0000000_00011_00010_000_00001_0110011; // x1 = x2 + x3
+        #20 READ_DATA = 32'h0000000A; // Sample read data
 
-        // Test Case 2: OR instruction (R-type)
-        INSTRUCTION = 32'b0000000_00100_00011_110_00101_0110011; // OR x5, x3, x4
-        #10;
+        // Test OR instruction: or x4, x5, x6
+        #10 PC = 32'h00000008; INSTRUCTION = 32'b0000000_00110_00101_110_00100_0110011; // x4 = x5 | x6
 
-        // Test Case 3: AND instruction (R-type)
-        INSTRUCTION = 32'b0000000_00110_00101_111_00111_0110011; // AND x7, x5, x6
-        #10;
+        // Test AND instruction: and x7, x8, x9
+        #10 PC = 32'h0000000C; INSTRUCTION = 32'b0000000_01001_01000_111_00111_0110011; // x7 = x8 & x9
 
-        // Test Case 4: XOR instruction (R-type)
-        INSTRUCTION = 32'b0000000_01000_00111_100_01001_0110011; // XOR x9, x7, x8
-        #10;
+        // Test XOR instruction: xor x10, x11, x12
+        #10 PC = 32'h00000010; INSTRUCTION = 32'b0000000_01100_01011_100_01010_0110011; // x10 = x11 ^ x12
 
-        // End simulation
-        #50 $finish;
+        // Wait and finish simulation
+        #100 $finish;
     end
 
+    // Monitor outputs, including internal wire WRITE_DATA
+    initial begin
+        $monitor("Time: %0dns | PC: %h | INSTRUCTION: %h | MEM_READ: %b | MEM_WRITE: %b | MEM_ADDRESS: %h | MEM_WRITE_DATA: %h | WRITE_DATA: %h | DATA1: %h | DATA2: %h |data1: %h|data2: %h", 
+            $time, PC, INSTRUCTION, MEM_READ, MEM_WRITE, MEM_ADDRESS, MEM_WRITE_DATA, cpu.WRITE_DATA,cpu.INSTRUCTION_OUT[19:15],cpu.INSTRUCTION_OUT[24:20],cpu.DATA1,cpu.DATA2);
+    end
 endmodule
