@@ -19,6 +19,11 @@ module CPU_tb;
 
     // Test case
     initial begin
+
+        // Dump waveform for analysis
+        $dumpfile("cpu_tb.vcd");
+        $dumpvars(0, CPU_tb);
+
         // Initialize signals
         RESET = 1;
         PC = 32'h00000000;
