@@ -39,8 +39,8 @@ input [31:0] operand_A;
 input [31:0] operand_B;
 output [31:0] result;
 
-// assign #2 result=operand_A ^ operand_B;  
-assign #2 result = (operand_A | operand_B) & ~(operand_A & operand_B);   
+assign #2 result=operand_A ^ operand_B;  
+// assign #2 result = (operand_A | operand_B) & ~(operand_A & operand_B);   
     
 endmodule
 
