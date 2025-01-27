@@ -39,6 +39,8 @@ module Register_file(
     // Assign outputs
     assign DATA_OUT1 = DATA1;
     assign DATA_OUT2 = DATA2;
+    //print register file
+  
 
 endmodule
 

@@ -36,16 +36,22 @@ module CPU_tb;
 
         // Test ADD instruction: add x1, x2, x3 (Assume opcode and format are correct)
         #10 PC = 32'h00000004; INSTRUCTION = 32'b0000000_00011_00010_000_00001_0110011; // x1 = x2 + x3
-        #20 READ_DATA = 32'h0000000A; // Sample read data
+        // #20 READ_DATA = 32'h0000000A; // Sample read data
+
+        // Test SUB instruction: sub x1, x12, x5
+        #10 PC = 32'h00000008; INSTRUCTION = 32'b0100000_00101_01100_000_00001_0110011; // x1 = x12 - x5
 
         // Test OR instruction: or x4, x5, x6
-        #10 PC = 32'h00000008; INSTRUCTION = 32'b0000000_00110_00101_110_00100_0110011; // x4 = x5 | x6
+        #10 PC = 32'h0000000C; INSTRUCTION = 32'b0000000_00110_00101_110_00100_0110011; // x4 = x5 | x6
 
         // Test AND instruction: and x7, x8, x9
-        #10 PC = 32'h0000000C; INSTRUCTION = 32'b0000000_01001_01000_111_00111_0110011; // x7 = x8 & x9
+        #10 PC = 32'h00000010; INSTRUCTION = 32'b0000000_01001_01000_111_00111_0110011; // x7 = x8 & x9
 
         // Test XOR instruction: xor x10, x11, x12
-        #10 PC = 32'h00000010; INSTRUCTION = 32'b0000000_01100_01011_100_01010_0110011; // x10 = x11 ^ x12
+        #10 PC = 32'h00000014; INSTRUCTION = 32'b0000000_01100_01011_100_01010_0110011; // x10 = x11 ^ x12
+
+        // Test addi instruction: addi x13, x14, 0x000A
+        #10 PC = 32'h00000018; INSTRUCTION = 32'b0000000_1010_01110_000_01101_0010011; // x13 = x14 + 0x000A
 
         // Wait and finish simulation
         #100 $finish;
