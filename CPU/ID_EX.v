@@ -27,50 +27,50 @@ module ID_EX(CLK,RESET,BUSYWAIT,
     input  JAL_IN;
     input  TWOSCOMP_IN;
     
-    output reg [31:0] PC_PLUS_FOUR_OUT;
-    output reg [31:0] PC_OUT;
-    output reg [31:0] IMM_OUT;
-    output reg [31:0] DATA1_OUT;
-    output reg [31:0] DATA2_OUT;
-    output reg [2:0] FUNC3_OUT;
-    output reg [4:0] RD_OUT;
+    output reg [31:0] PC_PLUS_FOUR_OUT = 32'd0;
+    output reg [31:0] PC_OUT = 32'd0;
+    output reg [31:0] IMM_OUT = 32'd0;
+    output reg [31:0] DATA1_OUT = 32'd0;
+    output reg [31:0] DATA2_OUT = 32'd0;
+    output reg [2:0] FUNC3_OUT = 3'd0;
+    output reg [4:0] RD_OUT = 5'd0;
 
-    output reg [4:0] ALU_OUT;
-    output reg MUX1_OUT;
-    output reg MUX2_OUT;
-    output reg MUX3_OUT;
-    output reg REGWRITE_OUT;
-    output reg MEMWRITE_OUT;
-    output reg MEMREAD_OUT;
-    output reg BRANCH_OUT;
-    output reg JUMP_OUT;
-    output reg JAL_OUT;
-    output reg TWOSCOMP_OUT;
+    output reg [4:0] ALU_OUT = 5'd0;
+    output reg MUX1_OUT = 1'b0;
+    output reg MUX2_OUT = 1'b0;
+    output reg MUX3_OUT = 1'b0;
+    output reg REGWRITE_OUT = 1'b0;
+    output reg MEMWRITE_OUT = 1'b0;
+    output reg MEMREAD_OUT = 1'b0;
+    output reg BRANCH_OUT = 1'b0;
+    output reg JUMP_OUT = 1'b0;
+    output reg JAL_OUT = 1'b0;
+    output reg TWOSCOMP_OUT = 1'b0;
     
 
     always @(posedge CLK) begin
-        if (RESET==1'b1) begin
-            PC_OUT=32'd0;
-            PC_PLUS_FOUR_OUT=32'd0;
-            IMM_OUT=32'd0;  
-            DATA1_OUT=32'd0;
-            DATA2_OUT=32'd0;
-            FUNC3_OUT=3'd0;
-            RD_OUT=5'd0;
-            ALU_OUT=5'd0;
-            MUX1_OUT=1'b0;
-            MUX2_OUT=1'b0;
-            MUX3_OUT=1'b0;
-            REGWRITE_OUT=1'b0;
-            MEMWRITE_OUT=1'b0;
-            MEMREAD_OUT=1'b0;
-            BRANCH_OUT=1'b0;
-            JUMP_OUT=1'b0;
-            JAL_OUT=1'b0;
-            TWOSCOMP_OUT=1'b0;
+        if (RESET == 1'b1) begin
+            PC_OUT <= 32'd0;
+            PC_PLUS_FOUR_OUT <= 32'd0;
+            IMM_OUT <= 32'd0;  
+            DATA1_OUT <= 32'd0;
+            DATA2_OUT <= 32'd0;
+            FUNC3_OUT <= 3'd0;
+            RD_OUT <= 5'd0;
+            ALU_OUT <= 5'd0;
+            MUX1_OUT <= 1'b0;
+            MUX2_OUT <= 1'b0;
+            MUX3_OUT <= 1'b0;
+            REGWRITE_OUT <= 1'b0;
+            MEMWRITE_OUT <= 1'b0;
+            MEMREAD_OUT <= 1'b0;
+            BRANCH_OUT <= 1'b0;
+            JUMP_OUT <= 1'b0;
+            JAL_OUT <= 1'b0;
+            TWOSCOMP_OUT <= 1'b0;
 
         end 
-        else begin
+        else if (!BUSYWAIT) begin
             #2
             IMM_OUT <= IMM_IN;
             PC_PLUS_FOUR_OUT <= PC_PLUS_FOUR_IN;
@@ -94,3 +94,4 @@ module ID_EX(CLK,RESET,BUSYWAIT,
         end   
     end
 endmodule
+

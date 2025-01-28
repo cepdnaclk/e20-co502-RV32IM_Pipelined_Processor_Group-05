@@ -51,4 +51,12 @@ module Register_file(
     assign DATA_OUT1 = DATA1;
     assign DATA_OUT2 = DATA2;
 
+    //print register file
+    initial begin
+        $display("Register File:");
+        for (i = 0; i < 32; i = i + 1) begin
+            $display("Register %d: %d", i, REGISTER_FILE[i]);
+        end
+    end
+
 endmodule

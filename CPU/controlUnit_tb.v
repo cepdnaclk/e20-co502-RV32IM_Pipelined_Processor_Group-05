@@ -1,5 +1,5 @@
 `timescale 1ns/100ps
-
+`include "controlUnit.v"
 /******************************************
 *  Testbench for R-Type Instructions in controlUnit
 *******************************************/
