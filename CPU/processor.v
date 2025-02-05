@@ -1,0 +1,4 @@
+module processor();
+    
+    CPU cpu_mod(PC,INSTRUCTION,CLK,RESET,READ_DATA,BUSYWAIT,MEM_READ,MEM_WRITE,MEM_WRITE_DATA,MEM_ADDRESS);
+endmodule
