@@ -1,4 +1,5 @@
 module Register_file(
+
     input [4:0] ADRS1,            // Address of the first register
     input [4:0] ADRS2,            // Address of the second register
     input [4:0] WB_ADDRESS,       // Writeback register address
@@ -36,9 +37,17 @@ module Register_file(
         DATA2 = REGISTER_FILE[ADRS2];
     end
 
+    initial begin
+        $dumpfile("cpu_tb.vcd");
+        for(i=0;i<32;i++)
+            $dumpvars(0,Register_file.REGISTER_FILE[i]);
+    end 
+
     // Assign outputs
     assign DATA_OUT1 = DATA1;
     assign DATA_OUT2 = DATA2;
+    //print register file
+  
 
 endmodule
 

@@ -87,11 +87,13 @@ module CPU(PC,INSTRUCTION,CLK,RESET,READ_DATA,BUSYWAIT,MEM_READ,MEM_WRITE,MEM_WR
     wire MUX3_SELECT_OUT3;
     wire [31:0] JAL_RESULT3;
     wire [31:0] READ_DATA_OUT;
-    wire [4:0] RD_OUT3;
+
+    // wire [4:0] RD_OUT3; commented because it is not used in MEM_WB module out (Bhagya)
+
     //here write_enable,rd_out3 is input to register file module
     MEM_WB MEM_WBREG(CLK,RESET,BUSYWAIT,
         MUX3_SELECT_OUT2,REGWRITE_ENABLE_OUT2,JAL_RESULT2,READ_DATA,RD_OUT2,
-        MUX3_SELECT_OUT3,WRITE_ENABLE,JAL_RESULT3,READ_DATA_OUT,RD_OUT3);
+        MUX3_SELECT_OUT3,WRITE_ENABLE,JAL_RESULT3,READ_DATA_OUT,WB_ADDRESS); //added WB_ADDRESS as output of MEM_WB module instead of RD_OUT3 (Bhagya)
     
     mux_2x1_32bit MUX3(JAL_RESULT3,READ_DATA_OUT,WRITE_DATA,MUX3_SELECT_OUT3);
 endmodule

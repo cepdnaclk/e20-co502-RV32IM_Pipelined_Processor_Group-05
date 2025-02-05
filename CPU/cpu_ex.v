@@ -1,6 +1,6 @@
 `timescale 1ns/100ps
 
-`include "alu.v"
+`include "ALU.v"
 `include "controlUnit.v"
 `include "immediate_extend.v"
 `include "Register_file.v"

@@ -93,7 +93,7 @@ module controlUnit_tb;
         display_results(INSTRUCTION);
 
         // Test R-type MUL
-        INSTRUCTION = 32'b0111011_00001_00010_010_00011_0110011; // slt x3, x1, x2
+        INSTRUCTION = 32'b0111011_00001_00010_000_00011_0110011; // slt x3, x1, x2
         #10;
         display_results(INSTRUCTION);
 

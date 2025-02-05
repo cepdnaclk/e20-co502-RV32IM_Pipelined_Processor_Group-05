@@ -22,7 +22,7 @@ module SLT_module(operand_A, operand_B, result);
     input signed [31:0] operand_B;
     output [31:0] result;
 
-    assign result = (operand_A < operand_B) ? 1 : 0; // Signed comparison
+    assign #2 result = (operand_A < operand_B) ? 1 : 0; // Signed comparison
 endmodule
 
 module SLTU_module(operand_A, operand_B, result);
@@ -30,7 +30,7 @@ module SLTU_module(operand_A, operand_B, result);
     input [31:0] operand_B;
     output [31:0] result;
 
-    assign result = (operand_A < operand_B) ? 1 : 0; // Unsigned comparison
+    assign #2 result = (operand_A < operand_B) ? 1 : 0; // Unsigned comparison
 endmodule
 
 
@@ -39,7 +39,8 @@ input [31:0] operand_A;
 input [31:0] operand_B;
 output [31:0] result;
 
-assign #2 result=operand_A ^ operand_B;     
+assign #2 result=operand_A ^ operand_B;  
+// assign #2 result = (operand_A | operand_B) & ~(operand_A & operand_B);   
     
 endmodule
 
