@@ -28,7 +28,7 @@ module Data_Memory (
     reg read_access, write_access;
 
     // Detect memory access
-    always @(posedge Clock) begin
+    always @(Read, Write) begin
         busywait = (Read || Write) ? 1 : 0;
         read_access = (Read && !Write) ? 1 : 0;
         write_access = (!Read && Write) ? 1 : 0;
