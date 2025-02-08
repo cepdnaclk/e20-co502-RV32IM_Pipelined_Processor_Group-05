@@ -6,10 +6,11 @@ module CPU_tb;
     reg BUSYWAIT;
     reg [31:0] PC, INSTRUCTION, READ_DATA;
     wire MEM_READ, MEM_WRITE;
+    wire [2:0] FUNC3;
     wire [31:0] MEM_WRITE_DATA, MEM_ADDRESS;
 
     // Instantiate the CPU module
-    CPU cpu(PC, INSTRUCTION, CLK, RESET, READ_DATA, BUSYWAIT,MEM_READ, MEM_WRITE, MEM_WRITE_DATA, MEM_ADDRESS);
+    CPU cpu(PC, INSTRUCTION, CLK, RESET, READ_DATA, BUSYWAIT,MEM_READ, MEM_WRITE,FUNC3, MEM_WRITE_DATA, MEM_ADDRESS);
 
     // Clock generation
     initial begin
@@ -34,8 +35,8 @@ module CPU_tb;
         // Reset the CPU
         #10 RESET = 0;
 
-        // Test ADD instruction: add x1, x2, x3 (Assume opcode and format are correct)
-        #10 PC = 32'h00000004; INSTRUCTION = 32'b0000000_00011_00010_000_00001_0110011; // x1 = x2 + x3
+        // Test ADD instruction: add x2, x2, x3 (Assume opcode and format are correct)
+        #10 PC = 32'h00000004; INSTRUCTION = 32'b0000000_00011_00010_000_00010_0110011; // x2 = x2 + x3
         // #20 READ_DATA = 32'h0000000A; // Sample read data
 
         // Test SUB instruction: sub x1, x12, x5
