@@ -28,14 +28,14 @@ module Data_Memory (
     reg read_access, write_access;
 
     // Detect memory access
-    always @(Read, Write) begin
+    always @(posedge Clock) begin
         busywait = (Read || Write) ? 1 : 0;
         read_access = (Read && !Write) ? 1 : 0;
         write_access = (!Read && Write) ? 1 : 0;
     end
 
     // Memory read operation
-    always @(posedge Clock) begin
+    always @(*) begin
         if (read_access) begin
             case (Func3)
                 3'b000: // LB (Load Byte - Signed)
