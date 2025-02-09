@@ -253,8 +253,8 @@ always @(INSTRUCTION) //Decoding the instruction
                 assign MUX2 = 1;
                 assign MUX3 = 1;
                 assign REGISTERWRITE = 1;
-                assign MEMORYWRITE = 1;
-                assign MEMORYREAD = 0;
+                assign MEMORYWRITE = 0;
+                assign MEMORYREAD = 1;
                 assign BRANCH = 0;
                 assign JUMP = 0;
                 assign JAL = 0;

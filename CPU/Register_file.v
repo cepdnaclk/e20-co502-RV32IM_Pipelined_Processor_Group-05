@@ -37,10 +37,12 @@ module Register_file(
         DATA2 = REGISTER_FILE[ADRS2];
     end
 
+    // **Fixed $dumpvars syntax**
     initial begin
         $dumpfile("cpu_tb.vcd");
-        for(i=0;i<32;i++)
-            $dumpvars(0,Register_file.REGISTER_FILE[i]);
+        for (i = 0; i < 32; i = i + 1) begin
+            $dumpvars(0, REGISTER_FILE[i]);  
+        end
     end 
 
     // Assign outputs

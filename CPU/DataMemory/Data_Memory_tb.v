@@ -1,4 +1,6 @@
 // Testbench for Data Memory Module with LB, LH, LW, SH, SB, SW
+`timescale 1ns / 1ps
+`include "Data_Memory.v"
 module Data_Memory_tb;
     // Inputs
     reg Read;

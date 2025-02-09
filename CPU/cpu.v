@@ -12,6 +12,7 @@
 `include "mux_4x1_32bit.v"
 `include "adder_32bit.v"
 `include "Twos_complement.v"
+`include "Data_memory.v"
 
 module CPU(PC,INSTRUCTION,CLK,RESET,READ_DATA,BUSYWAIT,MEM_READ,MEM_WRITE,MEM_WRITE_DATA,MEM_ADDRESS);
     input [31:0] PC;
@@ -79,16 +80,18 @@ module CPU(PC,INSTRUCTION,CLK,RESET,READ_DATA,BUSYWAIT,MEM_READ,MEM_WRITE,MEM_WR
     EX_MEM EX_MEMREG(CLK,RESET,BUSYWAIT,
         MEMWRITE_OUT,MEMREAD_OUT,MUX3_SELECT_OUT,REGWRITE_ENABLE_OUT,JAL_RESULT,DATA2_OUT,FUNC3_OUT,RD_OUT,
         MEM_WRITE,MEM_READ,MUX3_SELECT_OUT2,REGWRITE_ENABLE_OUT2,JAL_RESULT2,MEM_WRITE_DATA,FUNC3_OUT2,RD_OUT2);
+
+
+     // wire [4:0] RD_OUT3; commented because it is not used in MEM_WB module out
+    Data_Memory data_mem(MEM_READ,MEM_WRITE,CLK,RESET,JAL_RESULT2,MEM_WRITE_DATA,FUNC3_OUT2,READ_DATA,BUSYWAIT);
     
     always @(*) begin
         MEM_ADDRESS = JAL_RESULT2; 
     end
-
+    
     wire MUX3_SELECT_OUT3;
     wire [31:0] JAL_RESULT3;
     wire [31:0] READ_DATA_OUT;
-
-    // wire [4:0] RD_OUT3; commented because it is not used in MEM_WB module out (Bhagya)
 
     //here write_enable,rd_out3 is input to register file module
     MEM_WB MEM_WBREG(CLK,RESET,BUSYWAIT,

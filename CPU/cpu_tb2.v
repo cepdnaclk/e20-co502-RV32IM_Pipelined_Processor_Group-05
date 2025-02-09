@@ -53,6 +53,13 @@ module CPU_tb;
         // Test addi instruction: addi x13, x14, 0x000A
         #10 PC = 32'h00000018; INSTRUCTION = 32'b0000000_1010_01110_000_01101_0010011; // x13 = x14 + 0x000A
 
+        // Test SW instruction: sw x8, 12(x9)
+        #10 PC = 32'h00000020; INSTRUCTION = 32'b0000000_01001_01000_010_01100_0100011; // memory[x9 + 12] = x8
+
+        // Test LW instruction: lw x17, 16(x18)
+        #10 PC = 32'h00000024; INSTRUCTION = 32'b0000000_10010_10001_010_10001_0000011; // x17 = memory[x18 + 16]
+
+
         // Wait and finish simulation
         #100 $finish;
     end
