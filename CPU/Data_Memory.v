@@ -35,7 +35,7 @@ module Data_Memory (
     end
     
     // Memory read operation
-    always @(posedge Clock) begin
+    always @(*) begin
         if (read_access) begin
             case (Func3)
                 3'b000: // LB (Load Byte - Signed)
