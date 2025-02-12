@@ -19,16 +19,24 @@ module instruction_memory (
             imem[i] = 32'h00000013;
         end
         
+        // Load instructions from binary file
+        $readmemb("program.mem", imem);
+        $display("Program loaded from program.mem");
         // Example instructions (RV32IM)
         // You can modify these or load from a file
-        imem[0]  = 32'b0000000_00011_00010_000_00001_0110011; // add x1, x2, x3 
-        imem[1]  = 32'b0100000_00101_01100_000_00001_0110011; // sub x1, x12, x5
-        imem[2]  = 32'b0000000_00110_00101_110_00100_0110011; // or x4, x5, x6
-        imem[3]  = 32'b0000000_01001_01000_111_00111_0110011; // and x7, x8, x9
-        imem[4]  = 32'b0000000_01100_01011_100_01010_0110011; // xor x10, x11, x12
-        imem[5]  = 32'b0000000_01010_01110_000_01101_0010011; // addi x13, x14, 0x000A
-        imem[6]  = 32'b0000000_01001_01000_010_01100_0100011; // sw x8, 12(x9)
-        imem[7]  = 32'b0000000_10010_10001_010_10001_0000011; // lw x17, 16(x18)
+        //imem[0]  = 32'b0000000_00011_00010_000_00001_0110011; // add x1, x2, x3 
+        //imem[1]  = 32'b0100000_00101_01100_000_00001_0110011; // sub x1, x12, x5
+        //imem[2]  = 32'b0000000_00110_00101_110_00100_0110011; // or x4, x5, x6
+        //imem[3]  = 32'b0000000_01001_01000_111_00111_0110011; // and x7, x8, x9
+        //imem[4]  = 32'b0000000_01100_01011_100_01010_0110011; // xor x10, x11, x12
+        //imem[5]  = 32'b0000000_01010_01110_000_01101_0010011; // addi x13, x14, 0x000A
+        //imem[6]  = 32'b0000000_01001_01000_010_01100_0100011; // sw x8, 12(x9)
+        //imem[7]  = 32'b0000000_10010_10001_010_10001_0000011; // lw x17, 16(x18)
+    end
+
+    initial begin
+        $readmemb("program.mem", imem);  // Use $readmemb for binary format
+        $display("Program loaded from program.mem");
     end
 
     // Asynchronous read
@@ -45,16 +53,7 @@ module instruction_memory (
         end
     end
 
-    // Optional: Add ability to load instructions from file
-    // synthesis translate_off
-    //task load_program;
-    //    input string filename;
-    //    begin
-    //        $readmemh(filename, imem);
-    //    end
-    //endtask
-    // synthesis translate_on
-
+ 
 endmodule
 
 // End of file
