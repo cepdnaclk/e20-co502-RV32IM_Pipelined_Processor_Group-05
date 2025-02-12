@@ -37,7 +37,7 @@ module EX_MEM(CLK,RESET,BUSYWAIT,
             RD_OUT=1'b0;
         end 
         else if (BUSYWAIT == 1'b0) begin
-            #2
+            
             MEM_READ_OUT <= MEM_READ_IN; 
             MEM_WRITE_OUT <= MEM_WRITE_IN;
             MUX3_SELECT_OUT <= MUX3_SELECT_IN;
