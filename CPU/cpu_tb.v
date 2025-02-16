@@ -27,7 +27,7 @@ module CPU_tb;
         // Initialize signals
         RESET = 1;
         
-        #10 RESET = 0;
+        #11 RESET = 0;
 
         
         #500;

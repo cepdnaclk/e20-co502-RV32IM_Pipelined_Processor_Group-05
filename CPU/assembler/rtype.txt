@@ -1,0 +1,69 @@
+add x5, x6, x7
+x6 = 6, x7 = 7
+x5 = 6 + 7 = 13 (0xD)
+
+sub x8, x9, x10
+x9 = 9, x10 = 10
+x8 = 9 - 10 = -1 (0xFFFFFFFF)
+
+sll x11, x12, x13
+x12 = 12, x13 = 13
+x11 = 12 << 13 = 98304 (0x18000)
+
+slt x14, x15, x16
+x15 = 15, x16 = 16
+Since 15 < 16, x14 = 1 (0x1)
+
+sltu x17, x18, x19
+x18 = 18, x19 = 19
+Since 18 < 19, x17 = 1 (0x1)
+
+xor x20, x21, x22
+x21 = 21, x22 = 22
+x20 = 21 XOR 22 = 3 (0x3)
+
+srl x23, x24, x25
+x24 = 24, x25 = 25
+x23 = 24 >> 25 = 0 (0x0)
+
+sra x26, x27, x28
+x27 = 27, x28 = 28
+x26 = 27 >> 28 = 0 (0x0)
+
+or x29, x30, x31
+x30 = 30, x31 = 31
+x29 = 30 OR 31 = 31 (0x1F)
+
+and x1, x2, x3
+x2 = 2, x3 = 3
+x1 = 2 AND 3 = 2 (0x2)
+
+For the RV32M extension:
+
+mul x4, x5, x6
+x5 = 13 (from step 1), x6 = 6
+x4 = 13 * 6 = 78 (0x4E)
+
+mulh x7, x8, x9
+x8 = -1 (from step 2), x9 = 9
+x7 = high bits of (-1 * 9) = -1 (0xFFFFFFFF)
+
+mulhsu x10, x11, x12
+x11 = 98304 (from step 3), x12 = 12
+x10 = high bits of (98304 * 12) = 0 (0x0)
+
+mulhu x13, x14, x15
+x14 = 1 (from step 4), x15 = 15
+x13 = high bits of (1 * 15) = 0 (0x0)
+
+div x16, x17, x18
+x17 = 1 (from step 5), x18 = 18
+x16 = 1 / 18 = 0 (0x0)
+
+rem x19, x20, x21
+x20 = 3 (from step 6), x21 = 21
+x19 = 3 % 21 = 3 (0x3)
+
+remu x22, x23, x24
+x23 = 0 (from step 7), x24 = 24
+x22 = 0 % 24 = 0 (0x0)

@@ -50,7 +50,7 @@ module Register_file(
 
     //initialization for testing
     initial begin
-        #10
+        #11
         // Initialize registers
         //REGISTER_FILE[0] = 32'h00000000;
         REGISTER_FILE[1] = 32'h00000001;
