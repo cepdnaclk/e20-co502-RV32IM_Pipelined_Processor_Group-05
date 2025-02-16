@@ -1,20 +1,20 @@
-# Load Instructions
-lb    x5, 0(x10)   # Load byte from memory address in x10 into x5 (sign-extended)
-lh    x6, 4(x10)   # Load halfword from memory address in x10 + 4 into x6 (sign-extended)
-lw    x7, 8(x10)   # Load word from memory address in x10 + 8 into x7
-lbu   x8, 12(x10)  # Load byte from memory, zero-extended
-lhu   x9, 16(x10)  # Load halfword from memory, zero-extended
+# Memory and Load/Store Operations
+sw x14, 5(x0)     # Store 14 (0x0000000E) to Memory[5]
 
-# Immediate ALU Instructions
-addi  x11, x12, 5   # x11 = x12 + 5
-slli  x13, x14, 2   # x13 = x14 << 2 (logical shift left)
-slti  x15, x16, 3   # x15 = (x16 < 3) ? 1 : 0
-sltiu x17, x18, 7   # Unsigned version of slti
-xori  x19, x20, 10  # x19 = x20 XOR 10
-srli  x21, x22, 1   # x21 = x22 >> 1 (logical shift right)
-srai  x23, x24, 2   # x23 = x24 >> 2 (arithmetic shift right)
-ori   x25, x26, 15  # x25 = x26 OR 15
-andi  x27, x28, 255 # x27 = x28 AND 255
+# Load instructions will read same location but interpret differently
+lb x5, 5(x0)      # x5 = 0x0000000E (byte with sign extension)
+lh x6, 5(x0)      # x6 = 0x0000000E | Memory[6] (halfword with sign extension)
+lw x7, 5(x0)      # x7 = 0x0000000E | Memory[6-8] (full word)
+lbu x8, 5(x0)     # x8 = 0x0000000E (byte with zero extension)
+lhu x9, 5(x0)     # x9 = 0x0000000E | Memory[6] (halfword with zero extension)
 
-# Jump Register Instruction
-#jalr  x29, x30, 20  # Jump to x30 + 20, store return address in x29
+# Immediate ALU Instructions (x12=12, x14=14, x16=16, x18=18, x20=20, x22=22, x24=24, x26=26, x28=28)
+addi x11, x12, 5   # x11 = 12 + 5 = 17 (0x11)
+slli x13, x14, 2   # x13 = 14 << 2 = 56 (0x38)
+slti x15, x16, 3   # x15 = (16 < 3) ? 1 : 0 = 0 (0x0)
+sltiu x17, x18, 7  # x17 = (18 < 7) ? 1 : 0 = 0 (0x0)
+xori x19, x20, 10  # x19 = 20 XOR 10 = 30 (0x1E)
+srli x21, x22, 1   # x21 = 22 >> 1 = 11 (0xB)
+srai x23, x24, 2   # x23 = 24 >> 2 = 6 (0x6)
+ori x25, x26, 15   # x25 = 26 OR 15 = 31 (0x1F)
+andi x27, x28, 255 # x27 = 28 AND 255 = 28 (0x1C)
