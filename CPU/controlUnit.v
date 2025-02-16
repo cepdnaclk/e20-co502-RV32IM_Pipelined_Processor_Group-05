@@ -217,7 +217,7 @@ always @(INSTRUCTION) //Decoding the instruction
                             end
 
                             // mul, mulh, mulhsu, mulhu, div, rem, remu
-                            7'b0111011: begin
+                            7'b0000001: begin  // Changed from 0111011 to 0000001
                                 // assign ALUOP = {2'b01, FUNCT3}; //extend Funct3 to 5 bits by adding 01 in the MSB
                                 case(FUNCT3)
                                     3'b000 : assign ALUOP = 5'b01000;

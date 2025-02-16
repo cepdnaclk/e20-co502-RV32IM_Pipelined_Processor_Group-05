@@ -1,0 +1,52 @@
+lb x5, 0(x10)
+Loads byte from address 10 → 0x0A
+Sign-extended: 0xFFFFFFFA (since 0x0A is positive, remains the same)
+
+lh x6, 4(x10)
+Loads halfword from address 14 → 0x0E0F
+Sign-extended: 0x00000E0F
+
+lw x7, 8(x10)
+Loads word from address 18 → 0x12131415
+No sign extension needed: 0x12131415
+
+lbu x8, 12(x10)
+Loads byte from address 12 → 0x0C
+Zero-extended: 0x0000000C
+
+lhu x9, 16(x10)
+Loads halfword from address 16 → 0x1011
+Zero-extended: 0x00001011
+
+addi x11, x12, 5
+x12 = 12, so x11 = 12 + 5 = 17 → 0x00000011
+
+slli x13, x14, 2
+x14 = 14, shift left by 2 → 14 × 4 = 56 → 0x00000038
+
+slti x15, x16, 3
+x16 = 16, is it < 3? No, so x15 = 0 → 0x00000000
+
+sltiu x17, x18, 7
+x18 = 18, is it < 7? No, so x17 = 0 → 0x00000000
+
+xori x19, x20, 10
+x20 = 20, XOR with 0xA:
+20 (0x14) ⊕ 10 (0xA) = 0x1E
+→ 0x0000001E
+
+srli x21, x22, 1
+x22 = 22, shift right by 1 → 22 / 2 = 11 → 0x0000000B
+
+srai x23, x24, 2
+x24 = 24, arithmetic shift right by 2 → 24 / 4 = 6 → 0x00000006
+
+ori x25, x26, 15
+x26 = 26, OR with 0xF:
+26 (0x1A) | 15 (0xF) = 0x1F
+→ 0x0000001F
+
+andi x27, x28, 255
+x28 = 28, AND with 0xFF:
+0x1C & 0xFF = 0x1C
+→ 0x0000001C

@@ -71,7 +71,7 @@ module ID_EX(CLK,RESET,BUSYWAIT,
 
         end 
         else if (!BUSYWAIT) begin
-            #2
+            
             IMM_OUT <= IMM_IN;
             PC_PLUS_FOUR_OUT <= PC_PLUS_FOUR_IN;
             PC_OUT <= PC_IN;

@@ -8,16 +8,15 @@
 `include "ID_EX.v"
 `include "IF_ID.v"
 `include "MEM_WB.v"
-`include "mux_2x1_32bit.v"
 `include "mux_4x1_32bit.v"
-`include "adder_32bit.v"
 `include "Twos_complement.v"
 `include "Data_memory.v"
+`include "pc.v"
+`include "Instruction_mem.v"
 
-module CPU(PC,INSTRUCTION,CLK,RESET,READ_DATA,BUSYWAIT,MEM_READ,MEM_WRITE,MEM_WRITE_DATA,MEM_ADDRESS);
+module CPU(input CLK,input RESET);
     input [31:0] PC;
     input [31:0] INSTRUCTION;
-    input CLK,RESET;
     input [31:0] READ_DATA;
     input BUSYWAIT;
     output wire MEM_READ,MEM_WRITE;
@@ -25,7 +24,19 @@ module CPU(PC,INSTRUCTION,CLK,RESET,READ_DATA,BUSYWAIT,MEM_READ,MEM_WRITE,MEM_WR
     output reg [31:0] MEM_ADDRESS;
 
     wire [31:0] PC_PLUS_FOUR;
-    adder_32bit adder(PC,PC_PLUS_FOUR);
+    //adder_32bit adder(PC,PC_PLUS_FOUR);
+
+    //pc module is instantiated here
+    program_counter pc(CLK,RESET,branch_address,branch_enable,PC,PC_PLUS_FOUR); 
+
+    //instruction_memory module is instantiated here
+    // Instruction memory instantiation
+    instruction_memory i_mem(
+        .clk(CLK),
+        .reset(RESET),
+        .pc(PC),
+        .instruction(INSTRUCTION)
+    );
     
     //BUSYWAIT IS A OUTPUT OF DATA MEMORY MODULE
     //wire BUSYWAIT;
@@ -82,8 +93,18 @@ module CPU(PC,INSTRUCTION,CLK,RESET,READ_DATA,BUSYWAIT,MEM_READ,MEM_WRITE,MEM_WR
         MEM_WRITE,MEM_READ,MUX3_SELECT_OUT2,REGWRITE_ENABLE_OUT2,JAL_RESULT2,MEM_WRITE_DATA,FUNC3_OUT2,RD_OUT2);
 
 
-     // wire [4:0] RD_OUT3; commented because it is not used in MEM_WB module out
-    Data_Memory data_mem(MEM_READ,MEM_WRITE,CLK,RESET,JAL_RESULT2,MEM_WRITE_DATA,FUNC3_OUT2,READ_DATA,BUSYWAIT);
+     // Data memory is now internal to CPU
+    Data_Memory data_mem(
+        .Read(MEM_READ),
+        .Write(MEM_WRITE),
+        .Clock(CLK),
+        .Reset(RESET),
+        .Address(JAL_RESULT2),
+        .Write_data(MEM_WRITE_DATA),
+        .Func3(FUNC3_OUT2),
+        .Read_data(READ_DATA),
+        .busywait(BUSYWAIT)
+    );
     
     always @(*) begin
         MEM_ADDRESS = JAL_RESULT2; 
