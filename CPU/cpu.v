@@ -8,24 +8,35 @@
 `include "ID_EX.v"
 `include "IF_ID.v"
 `include "MEM_WB.v"
-`include "mux_2x1_32bit.v"
 `include "mux_4x1_32bit.v"
-`include "adder_32bit.v"
 `include "Twos_complement.v"
+`include "Data_memory.v"
+`include "pc.v"
+`include "Instruction_mem.v"
 
-module CPU(PC,INSTRUCTION,CLK,RESET,READ_DATA,BUSYWAIT,MEM_READ,MEM_WRITE,FUNC3,MEM_WRITE_DATA,MEM_ADDRESS);
+module CPU(input CLK,input RESET);
     input [31:0] PC;
     input [31:0] INSTRUCTION;
-    input CLK,RESET;
     input [31:0] READ_DATA;
     input BUSYWAIT;
     output wire MEM_READ,MEM_WRITE;
-    output wire [2:0] FUNC3; // Func3 is a output not a wire
     output wire [31:0] MEM_WRITE_DATA;
     output reg [31:0] MEM_ADDRESS;
 
     wire [31:0] PC_PLUS_FOUR;
-    adder_32bit adder(PC,PC_PLUS_FOUR);
+    //adder_32bit adder(PC,PC_PLUS_FOUR);
+
+    //pc module is instantiated here
+    program_counter pc(CLK,RESET,branch_address,branch_enable,PC,PC_PLUS_FOUR); 
+
+    //instruction_memory module is instantiated here
+    // Instruction memory instantiation
+    instruction_memory i_mem(
+        .clk(CLK),
+        .reset(RESET),
+        .pc(PC),
+        .instruction(INSTRUCTION)
+    );
     
     //BUSYWAIT IS A OUTPUT OF DATA MEMORY MODULE
     //wire BUSYWAIT;
@@ -74,22 +85,34 @@ module CPU(PC,INSTRUCTION,CLK,RESET,READ_DATA,BUSYWAIT,MEM_READ,MEM_WRITE,FUNC3,
 
     wire MUX3_SELECT_OUT2,REGWRITE_ENABLE_OUT2;
     wire [31:0] JAL_RESULT2,DATA2_OUT2;
-    // wire [2:0] FUNC3_OUT2; commented because it is not used in MEM_WB module out (Bhagya) it is a CPU output
+    wire [2:0] FUNC3_OUT2;
     wire [4:0] RD_OUT2;
-    //HERE MEM_WRITE,MEM_READ,MEM_WRITE_DATA,MEM_ADDRESS all are output of CPU module ********and func3 also a output (Bhagya)
+    //HERE MEM_WRITE,MEM_READ,MEM_WRITE_DATA,MEM_ADDRESS all are output of CPU module
     EX_MEM EX_MEMREG(CLK,RESET,BUSYWAIT,
         MEMWRITE_OUT,MEMREAD_OUT,MUX3_SELECT_OUT,REGWRITE_ENABLE_OUT,JAL_RESULT,DATA2_OUT,FUNC3_OUT,RD_OUT,
-        MEM_WRITE,MEM_READ,MUX3_SELECT_OUT2,REGWRITE_ENABLE_OUT2,JAL_RESULT2,MEM_WRITE_DATA,FUNC3,RD_OUT2);
+        MEM_WRITE,MEM_READ,MUX3_SELECT_OUT2,REGWRITE_ENABLE_OUT2,JAL_RESULT2,MEM_WRITE_DATA,FUNC3_OUT2,RD_OUT2);
+
+
+     // Data memory is now internal to CPU
+    Data_Memory data_mem(
+        .Read(MEM_READ),
+        .Write(MEM_WRITE),
+        .Clock(CLK),
+        .Reset(RESET),
+        .Address(JAL_RESULT2),
+        .Write_data(MEM_WRITE_DATA),
+        .Func3(FUNC3_OUT2),
+        .Read_data(READ_DATA),
+        .busywait(BUSYWAIT)
+    );
     
     always @(*) begin
         MEM_ADDRESS = JAL_RESULT2; 
     end
-
+    
     wire MUX3_SELECT_OUT3;
     wire [31:0] JAL_RESULT3;
     wire [31:0] READ_DATA_OUT;
-
-    // wire [4:0] RD_OUT3; commented because it is not used in MEM_WB module out (Bhagya)
 
     //here write_enable,rd_out3 is input to register file module
     MEM_WB MEM_WBREG(CLK,RESET,BUSYWAIT,

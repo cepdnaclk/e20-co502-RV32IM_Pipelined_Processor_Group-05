@@ -7,7 +7,7 @@
 
 
 
-//`timescale 1ns/100ps
+`timescale 1ns/100ps
 // Data Memory Module
 module Data_Memory (
     input               Read,         // Memory read signal
@@ -35,7 +35,7 @@ module Data_Memory (
     end
 
     // Memory read operation
-    always @(posedge Clock) begin
+    always @(*) begin
         if (read_access) begin
             case (Func3)
                 3'b000: // LB (Load Byte - Signed)

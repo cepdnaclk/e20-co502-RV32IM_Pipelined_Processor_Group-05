@@ -78,13 +78,13 @@
         sra          0110011   101     0100000    00101    1     1     0    1             0           0          0      0    0   000  1
         or           0110011   110     0000000    00110    1     1     0    1             0           0          0      0    0   000  0
         and          0110011   111     0000000    00111    1     1     0    1             0           0          0      0    0   000  0
-        mul          0110011   000     0111011    01000    1     1     0    1             0           0          0      0    0   000  0
-        mulh         0110011   001     0111011    01001    1     1     0    1             0           0          0      0    0   000  0
-        mulhsu       0110011   010     0111011    01010    1     1     0    1             0           0          0      0    0   000  0
-        mulhu        0110011   011     0111011    01011    1     1     0    1             0           0          0      0    0   000  0
-        div          0110011   100     0111011    01100    1     1     0    1             0           0          0      0    0   000  0
-        rem          0110011   110     0111011    01101    1     1     0    1             0           0          0      0    0   000  0
-        remu         0110011   111     0111011    01111    1     1     0    1             0           0          0      0    0   000  0
+        mul          0110011   000     0000001    01000    1     1     0    1             0           0          0      0    0   000  0
+        mulh         0110011   001     0000001    01001    1     1     0    1             0           0          0      0    0   000  0
+        mulhsu       0110011   010     0000001    01010    1     1     0    1             0           0          0      0    0   000  0
+        mulhu        0110011   011     0000001    01011    1     1     0    1             0           0          0      0    0   000  0
+        div          0110011   100     0000001    01100    1     1     0    1             0           0          0      0    0   000  0
+        rem          0110011   110     0000001    01101    1     1     0    1             0           0          0      0    0   000  0
+        remu         0110011   111     0000001    01111    1     1     0    1             0           0          0      0    0   000  0
 
     I-type instructions
 
@@ -217,7 +217,7 @@ always @(INSTRUCTION) //Decoding the instruction
                             end
 
                             // mul, mulh, mulhsu, mulhu, div, rem, remu
-                            7'b0111011: begin
+                            7'b0000001: begin  // Changed from 0111011 to 0000001
                                 // assign ALUOP = {2'b01, FUNCT3}; //extend Funct3 to 5 bits by adding 01 in the MSB
                                 case(FUNCT3)
                                     3'b000 : assign ALUOP = 5'b01000;
@@ -253,8 +253,8 @@ always @(INSTRUCTION) //Decoding the instruction
                 assign MUX2 = 1;
                 assign MUX3 = 1;
                 assign REGISTERWRITE = 1;
-                assign MEMORYWRITE = 1;
-                assign MEMORYREAD = 0;
+                assign MEMORYWRITE = 0;
+                assign MEMORYREAD = 1;
                 assign BRANCH = 0;
                 assign JUMP = 0;
                 assign JAL = 0;

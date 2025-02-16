@@ -1,2 +1,9 @@
 
 CPU/Register/register_dump.vcd
+CPU/cpu_tb.vcd
+CPU/cpu_tb.vcd
+CPU/cpu_tb2.vvp
+*.vcd
+CPU/cpu_tb2.vvp
+CPU/cpu_tb.vcd
+CPU/cpu_tb.vvp

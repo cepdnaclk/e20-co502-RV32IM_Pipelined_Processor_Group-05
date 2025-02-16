@@ -10,7 +10,7 @@ module IF_ID(CLK,RESET,BUSYWAIT,PC_PLUS_FOUR_IN,PC_IN,INSTRUCTION_IN,PC_PLUS_FOU
     output reg [31:0] PC_PLUS_FOUR_OUT;
     output reg [31:0] PC_OUT;
     output reg [31:0] INSTRUCTION_OUT;
-
+    
     always @(posedge CLK) begin
         if (RESET==1'b1) begin
             PC_OUT=32'd0;
@@ -18,7 +18,7 @@ module IF_ID(CLK,RESET,BUSYWAIT,PC_PLUS_FOUR_IN,PC_IN,INSTRUCTION_IN,PC_PLUS_FOU
             INSTRUCTION_OUT=32'd0;    
         end 
         else if (BUSYWAIT == 1'b0) begin
-            #2
+
             INSTRUCTION_OUT <= INSTRUCTION_IN;
             PC_PLUS_FOUR_OUT <= PC_PLUS_FOUR_IN;
             PC_OUT <= PC_IN;

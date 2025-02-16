@@ -27,7 +27,7 @@ module MEM_WB( CLK,RESET,BUSYWAIT,
             RD_OUT=1'b0;
         end 
         else if (BUSYWAIT == 1'b0) begin
-            #2
+            
             MUX3_SELECT_OUT <= MUX3_SELECT_IN;
             REGWRITE_ENABLE_OUT <= REGWRITE_ENABLE_IN;
             ALUOUT_OUT <= ALUOUT_IN;
