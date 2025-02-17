@@ -1,0 +1,92 @@
+#! /c/Source/iverilog-install/bin/vvp
+:ivl_version "12.0 (devel)" "(s20150603-1110-g18392a46)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "C:\iverilog\lib\ivl\system.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_sys.vpi";
+:vpi_module "C:\iverilog\lib\ivl\vhdl_textio.vpi";
+:vpi_module "C:\iverilog\lib\ivl\v2005_math.vpi";
+:vpi_module "C:\iverilog\lib\ivl\va_math.vpi";
+S_000001537e962df0 .scope module, "Forwarding_Unit" "Forwarding_Unit" 2 1;
+ .timescale 0 0;
+    .port_info 0 /INPUT 5 "rs1";
+    .port_info 1 /INPUT 5 "rs2";
+    .port_info 2 /INPUT 32 "data1";
+    .port_info 3 /INPUT 32 "data2";
+    .port_info 4 /INPUT 5 "rd1";
+    .port_info 5 /INPUT 5 "rd2";
+    .port_info 6 /INPUT 32 "EX_MEM_data";
+    .port_info 7 /INPUT 32 "MEM_WB_data";
+    .port_info 8 /OUTPUT 32 "rs1_out";
+    .port_info 9 /OUTPUT 32 "rs2_out";
+o000001537e996fd8 .functor BUFZ 32, C4<zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz>; HiZ drive
+v000001537e963030_0 .net "EX_MEM_data", 31 0, o000001537e996fd8;  0 drivers
+o000001537e997008 .functor BUFZ 32, C4<zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz>; HiZ drive
+v000001537e9630d0_0 .net "MEM_WB_data", 31 0, o000001537e997008;  0 drivers
+o000001537e997038 .functor BUFZ 32, C4<zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz>; HiZ drive
+v000001537e71ba10_0 .net "data1", 31 0, o000001537e997038;  0 drivers
+o000001537e997068 .functor BUFZ 32, C4<zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz>; HiZ drive
+v000001537e71bab0_0 .net "data2", 31 0, o000001537e997068;  0 drivers
+o000001537e997098 .functor BUFZ 5, C4<zzzzz>; HiZ drive
+v000001537e993ab0_0 .net "rd1", 4 0, o000001537e997098;  0 drivers
+o000001537e9970c8 .functor BUFZ 5, C4<zzzzz>; HiZ drive
+v000001537e993b50_0 .net "rd2", 4 0, o000001537e9970c8;  0 drivers
+o000001537e9970f8 .functor BUFZ 5, C4<zzzzz>; HiZ drive
+v000001537e993bf0_0 .net "rs1", 4 0, o000001537e9970f8;  0 drivers
+v000001537e993c90_0 .var "rs1_out", 31 0;
+o000001537e997158 .functor BUFZ 5, C4<zzzzz>; HiZ drive
+v000001537e993d30_0 .net "rs2", 4 0, o000001537e997158;  0 drivers
+v000001537e993e60_0 .var "rs2_out", 31 0;
+E_000001537e71c560/0 .event anyedge, v000001537e993ab0_0, v000001537e993bf0_0, v000001537e963030_0, v000001537e993b50_0;
+E_000001537e71c560/1 .event anyedge, v000001537e9630d0_0, v000001537e71ba10_0, v000001537e993d30_0, v000001537e71bab0_0;
+E_000001537e71c560 .event/or E_000001537e71c560/0, E_000001537e71c560/1;
+    .scope S_000001537e962df0;
+T_0 ;
+    %wait E_000001537e71c560;
+    %load/vec4 v000001537e993ab0_0;
+    %load/vec4 v000001537e993bf0_0;
+    %cmp/e;
+    %jmp/0xz  T_0.0, 4;
+    %load/vec4 v000001537e963030_0;
+    %store/vec4 v000001537e993c90_0, 0, 32;
+    %jmp T_0.1;
+T_0.0 ;
+    %load/vec4 v000001537e993b50_0;
+    %load/vec4 v000001537e993bf0_0;
+    %cmp/e;
+    %jmp/0xz  T_0.2, 4;
+    %load/vec4 v000001537e9630d0_0;
+    %store/vec4 v000001537e993c90_0, 0, 32;
+    %jmp T_0.3;
+T_0.2 ;
+    %load/vec4 v000001537e71ba10_0;
+    %store/vec4 v000001537e993c90_0, 0, 32;
+T_0.3 ;
+T_0.1 ;
+    %load/vec4 v000001537e993ab0_0;
+    %load/vec4 v000001537e993d30_0;
+    %cmp/e;
+    %jmp/0xz  T_0.4, 4;
+    %load/vec4 v000001537e963030_0;
+    %store/vec4 v000001537e993e60_0, 0, 32;
+    %jmp T_0.5;
+T_0.4 ;
+    %load/vec4 v000001537e993b50_0;
+    %load/vec4 v000001537e993d30_0;
+    %cmp/e;
+    %jmp/0xz  T_0.6, 4;
+    %load/vec4 v000001537e9630d0_0;
+    %store/vec4 v000001537e993e60_0, 0, 32;
+    %jmp T_0.7;
+T_0.6 ;
+    %load/vec4 v000001537e71bab0_0;
+    %store/vec4 v000001537e993e60_0, 0, 32;
+T_0.7 ;
+T_0.5 ;
+    %jmp T_0;
+    .thread T_0, $push;
+# The file index is used to find the file name in the following table.
+:file_names 3;
+    "N/A";
+    "<interactive>";
+    "Forwarding_Unit.v";
