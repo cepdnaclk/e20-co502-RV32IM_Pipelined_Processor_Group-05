@@ -85,7 +85,7 @@ module CPU(input CLK,input RESET);
     ALU alu(OUT1,OUT2_TWOSCOMP,ALUOP_OUT,ALU_RESULT,ALU_ZERO);
 
     wire FLUSH;
-    branch_jump_control bjc(BRANCH_OUT,JUMP_OUT,ALU_ZERO,ALU_RESULT,FUNC3_OUT,PC_OUT2,extended_imm_value_out,branch_address,branch_ennable,FLUSH);
+    branch_jump_control bjc(BRANCH_OUT,JUMP_OUT,ALU_ZERO,ALU_RESULT,FUNC3_OUT,PC_OUT2,extended_imm_value_out,branch_address,branch_enable,FLUSH);
     
     wire [31:0] JAL_RESULT;
     mux_2x1_32bit JAL_MUX(ALU_RESULT,PC_PLUS_FOUR_OUT2,JAL_RESULT,JAL_OUT);
