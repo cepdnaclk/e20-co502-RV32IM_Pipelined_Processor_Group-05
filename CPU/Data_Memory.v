@@ -22,7 +22,7 @@ module Data_Memory (
         end
         else begin
             if (Read || Write) begin
-                busywait <= 1;
+                //busywait <= 1;
                 read_access <= Read && !Write;
                 write_access <= Write && !Read;
             end
