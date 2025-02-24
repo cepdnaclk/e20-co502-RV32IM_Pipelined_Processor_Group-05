@@ -1,15 +1,7 @@
-lui x1, 0x0       # Load upper immediate for x1 (set to 0)
-addi x1, x1, 5    # Add immediate value 5 to x1 (x1 = 5)
-
-lui x2, 0x0       # Load upper immediate for x2 (set to 0)
-addi x2, x2, 5    # Add immediate value 5 to x2 (x2 = 5)
-
-beq x1, x2, equal # Branch if x1 == x2 (they are equal)
-nop               # No operation if not equal
-j end             # Jump to end (bypass the equal label)
-
-equal:
-    nop               # Here if x1 == x2
-
-end:
-    nop               # End of the program
+addi x1, x0, 10      # x1 = 10
+addi x2, x0, 20      # x2 = 20
+addi x3, x0, 10      # x3 = 10
+addi x4, x0, 0       # x4 = 0 (To store result)
+beq x1, x3, 8
+addi x5, x0, 20  # This should be skipped if branch works
+addi x6, x0, 30  # Confirm branch was taken
