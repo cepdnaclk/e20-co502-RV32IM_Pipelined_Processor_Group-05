@@ -5,7 +5,7 @@ module ADD_module(operand_A,operand_B,result);
 input [31:0] operand_A;
 input [31:0] operand_B;
 output [31:0] result;
-assign #10 result=operand_A + operand_B;
+assign #0 result=operand_A + operand_B;
 
 endmodule
 
@@ -13,7 +13,7 @@ module SLL_module(operand_A,operand_B,result);
 input [31:0] operand_A;
 input [31:0] operand_B;
 output [31:0] result;
-assign #10 result=operand_A << operand_B;     
+assign #0 result=operand_A << operand_B;     
     
 endmodule
 
@@ -22,7 +22,7 @@ module SLT_module(operand_A, operand_B, result);
     input signed [31:0] operand_B;
     output [31:0] result;
 
-    assign #10 result = (operand_A < operand_B) ? 1 : 0; // Signed comparison
+    assign #0 result = (operand_A < operand_B) ? 1 : 0; // Signed comparison
 endmodule
 
 module SLTU_module(operand_A, operand_B, result);
@@ -30,7 +30,7 @@ module SLTU_module(operand_A, operand_B, result);
     input [31:0] operand_B;
     output [31:0] result;
 
-    assign #10 result = (operand_A < operand_B) ? 1 : 0; // Unsigned comparison
+    assign #0 result = (operand_A < operand_B) ? 1 : 0; // Unsigned comparison
 endmodule
 
 
@@ -39,8 +39,8 @@ input [31:0] operand_A;
 input [31:0] operand_B;
 output [31:0] result;
 
-assign #10 result=operand_A ^ operand_B;  
-// assign #10 result = (operand_A | operand_B) & ~(operand_A & operand_B);   
+assign #0 result=operand_A ^ operand_B;  
+// assign #0 result = (operand_A | operand_B) & ~(operand_A & operand_B);   
     
 endmodule
 
@@ -49,7 +49,7 @@ input [31:0] operand_A;
 input [31:0] operand_B;
 output [31:0] result;
 
-assign #10 result=operand_A >> operand_B;     
+assign #0 result=operand_A >> operand_B;     
     
 endmodule
 
@@ -58,7 +58,7 @@ input [31:0] operand_A;
 input [31:0] operand_B;
 output [31:0] result;
 
-assign #10 result=operand_A | operand_B;     
+assign #0 result=operand_A | operand_B;     
     
 endmodule
 
@@ -67,7 +67,7 @@ input [31:0] operand_A;
 input [31:0] operand_B;
 output [31:0] result;
 
-assign #10 result=operand_A & operand_B;     
+assign #0 result=operand_A & operand_B;     
     
 endmodule
 
@@ -77,7 +77,7 @@ input [31:0] operand_B;
 output [31:0] result;
 
 wire [63:0] product; // Temporary 64-bit product
-assign #10 product = operand_A * operand_B;
+assign #0 product = operand_A * operand_B;
 assign result = product[31:0]; // Upper 32 bits     
     
 endmodule
@@ -88,7 +88,7 @@ input signed [31:0] operand_B;
 output [31:0] result;
 
 wire [63:0] product; // Temporary 64-bit product
-assign #10 product = operand_A * operand_B;
+assign #0 product = operand_A * operand_B;
 assign result = product[63:32]; // Upper 32 bits    
     
 endmodule
@@ -99,7 +99,7 @@ input [31:0] operand_B;
 output [31:0] result;
 
 wire [63:0] product;
-assign #10 product=operand_A * operand_B;
+assign #0 product=operand_A * operand_B;
 assign result=product[63:32];     
     
 endmodule
@@ -110,7 +110,7 @@ input [31:0] operand_B;
 output [31:0] result;
 
 wire [63:0] product;
-assign #10 product=operand_A * operand_B;
+assign #0 product=operand_A * operand_B;
 assign result=product[63:32];      
     
 endmodule
@@ -120,7 +120,7 @@ input [31:0] operand_A;
 input [31:0] operand_B;
 output [31:0] result;
 
-assign #10 result=operand_A / operand_B;     
+assign #0 result=operand_A / operand_B;     
     
 endmodule
 
@@ -129,7 +129,7 @@ input signed [31:0] operand_A;
 input signed [31:0] operand_B;
 output signed [31:0] result;
 
-assign #10 result=operand_A % operand_B;     
+assign #0 result=operand_A % operand_B;     
     
 endmodule
 
@@ -138,7 +138,7 @@ input [31:0] operand_A;
 input [31:0] operand_B;
 output [31:0] result;
 
-assign #10 result=operand_A % operand_B;     
+assign #0 result=operand_A % operand_B;     
     
 endmodule
 

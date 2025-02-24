@@ -165,6 +165,22 @@ def assemble_instruction(line):
     # Other instruction types remain the same...
     return None
 
+    if opcode == '1101111':  # J-type (jal)
+        rd = register_to_binary(parts[1])
+        imm_str = parts[2].replace(',', '')
+        
+        # Convert immediate to 21-bit value
+        imm_val = int(imm_str, 0) if imm_str.startswith('0x') else int(imm_str)
+        
+        # J-type immediate encoding is complex:
+        # bits[20|10:1|11|19:12] from 21-bit immediate
+        imm = immediate_to_binary(imm_val, 21)
+        
+        # Reorder the bits according to J-type format
+        imm_reordered = imm[0] + imm[10:20] + imm[9] + imm[1:9]
+        
+        return f"{imm_reordered}{rd}{opcode}"
+
 def assemble_file(input_file, bin_file, hex_file):
     """Assemble a RISC-V assembly file into binary and hex files"""
     with open(input_file, 'r') as f, open(bin_file, 'w') as bin_out, open(hex_file, 'w') as hex_out:
