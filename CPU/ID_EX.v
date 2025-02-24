@@ -1,12 +1,15 @@
 `timescale 1ns/100ps
+
+// Flush added to the module as an input
 module ID_EX(CLK,RESET,BUSYWAIT,
             PC_PLUS_FOUR_IN,PC_IN,IMM_IN,DATA1_IN,DATA2_IN,FUNC3_IN,RD_IN,ALU_IN,MUX1_IN,MUX2_IN,MUX3_IN,REGWRITE_IN,MEMWRITE_IN,MEMREAD_IN,BRANCH_IN,JUMP_IN,JAL_IN,TWOSCOMP_IN,
-            PC_PLUS_FOUR_OUT,PC_OUT,IMM_OUT,ALU_OUT,MUX1_OUT,MUX2_OUT,MUX3_OUT,REGWRITE_OUT,MEMWRITE_OUT,MEMREAD_OUT,BRANCH_OUT,JUMP_OUT,JAL_OUT,TWOSCOMP_OUT,DATA1_OUT,DATA2_OUT,FUNC3_OUT,RD_OUT);
+            PC_PLUS_FOUR_OUT,PC_OUT,IMM_OUT,ALU_OUT,MUX1_OUT,MUX2_OUT,MUX3_OUT,REGWRITE_OUT,MEMWRITE_OUT,MEMREAD_OUT,BRANCH_OUT,JUMP_OUT,JAL_OUT,TWOSCOMP_OUT,DATA1_OUT,DATA2_OUT,FUNC3_OUT,RD_OUT,FLUSH);
 
 
     input CLK;
     input RESET;
     input BUSYWAIT;
+    input FLUSH; // Added input for FLUSH signal
     input [31:0] PC_PLUS_FOUR_IN;
     input [31:0] PC_IN;
     input [31:0] IMM_IN;
@@ -26,6 +29,7 @@ module ID_EX(CLK,RESET,BUSYWAIT,
     input  JUMP_IN;
     input  JAL_IN;
     input  TWOSCOMP_IN;
+    
     
     output reg [31:0] PC_PLUS_FOUR_OUT = 32'd0;
     output reg [31:0] PC_OUT = 32'd0;
@@ -49,7 +53,7 @@ module ID_EX(CLK,RESET,BUSYWAIT,
     
 
     always @(posedge CLK) begin
-        if (RESET == 1'b1) begin
+        if ((RESET||FLUSH) == 1'b1) begin
             PC_OUT <= 32'd0;
             PC_PLUS_FOUR_OUT <= 32'd0;
             IMM_OUT <= 32'd0;  
