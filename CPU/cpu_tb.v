@@ -30,7 +30,7 @@ module CPU_tb;
         #11 RESET = 0;
 
         
-        #500;
+        #100;
         $finish;
     end
 
