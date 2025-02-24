@@ -1,3 +1,7 @@
+################################
+# Author: 	D.B.S. Ariyarathna #
+################################
+
 import sys
 
 # Opcode, funct3, and funct7 mappings remain the same
