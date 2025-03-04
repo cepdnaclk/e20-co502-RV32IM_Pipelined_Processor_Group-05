@@ -14,6 +14,7 @@
 `include "pc.v"
 `include "Instruction_mem.v"
 `include "branch_jump_control.v"
+`include "Forwarding_Unit.v"
 
 module CPU(input CLK,input RESET);
     input [31:0] PC;
@@ -56,7 +57,8 @@ module CPU(input CLK,input RESET);
     wire WRITE_ENABLE;  // output of MEM_WB module 
     wire [31:0] WRITE_DATA;  // output of MEM_WB module
     wire [31:0] DATA1,DATA2; 
-    Register_file regfile(INSTRUCTION_OUT[19:15],INSTRUCTION_OUT[24:20],WB_ADDRESS,WRITE_ENABLE,WRITE_DATA,CLK,RESET,DATA1,DATA2);
+    wire [31:0] data1,data2;
+    Register_file regfile(INSTRUCTION_OUT[19:15],INSTRUCTION_OUT[24:20],WB_ADDRESS,WRITE_ENABLE,WRITE_DATA,CLK,RESET,data1,data2);
     
     wire [31:0] extended_imm_value;
     immediate_extend immex(INSTRUCTION_OUT,extended_imm_value,IMMEDIATE);
@@ -127,4 +129,6 @@ module CPU(input CLK,input RESET);
         MUX3_SELECT_OUT3,WRITE_ENABLE,JAL_RESULT3,READ_DATA_OUT,WB_ADDRESS); //added WB_ADDRESS as output of MEM_WB module instead of RD_OUT3 (Bhagya)
     
     mux_2x1_32bit MUX3(JAL_RESULT3,READ_DATA_OUT,WRITE_DATA,MUX3_SELECT_OUT3);
+
+    Forwarding_Unit FU(INSTRUCTION_OUT[19:15],INSTRUCTION_OUT[24:20],data1,data2,RD_OUT,RD_OUT2,JAL_RESULT,JAL_RESULT2,DATA1,DATA2);
 endmodule
