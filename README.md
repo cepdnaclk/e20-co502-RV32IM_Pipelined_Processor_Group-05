@@ -35,39 +35,39 @@ This project strengthens understanding of processor architecture, pipeline behav
 ## Key Features of the RV32IM Processor
 
 ### Pipeline Stages:
-Instruction Fetch (IF)
-Instruction Decode (ID)
-Execute (EX)
-Memory Access (MEM)
-Write Back (WB)
-The design ensures efficient instruction flow with minimized hazards and optimized performance.
+- Instruction Fetch (IF)
+- Instruction Decode (ID)
+- Execute (EX)
+- Memory Access (MEM)
+- Write Back (WB)
+- The design ensures efficient instruction flow with minimized hazards and optimized performance.
 
 ### Supported Instruction Set:
-RV32I Base Instructions: Arithmetic, logical, control flow, and load/store operations.
-M Extension: Multiplication (MUL) and division (DIV) instructions.
+- RV32I Base Instructions: Arithmetic, logical, control flow, and load/store operations.
+- M Extension: Multiplication (MUL) and division (DIV) instructions.
 
 ### Hazard Handling:
-Data hazards: Managed through forwarding and stalling mechanisms.
-Control hazards: Addressed using branch prediction or static/dynamic strategies.
+- Data hazards: Managed through forwarding and stalling mechanisms.
+- Control hazards: Addressed using branch prediction or static/dynamic strategies.
 
 ### Performance Enhancements:
-Pipeline balancing for improved throughput.
-Timing optimization based on PrimeTime analysis.
-Power evaluation using PrimePower.
+- Pipeline balancing for improved throughput.
+- Timing optimization based on PrimeTime analysis.
+- Power evaluation using PrimePower.
 
 ### Simulation and Verification:
-Verilog implementation using structured modular design.
-Testbench-based simulation to validate functional correctness.
-GTKWave for waveform inspection.
-Synopsys PrimePower for power analysis.
-Synopsys PrimeTime for timing and path verification.
-Tested with RISC-V toolchain and custom test programs.
+- Verilog implementation using structured modular design.
+- Testbench-based simulation to validate functional correctness.
+- GTKWave for waveform inspection.
+- Synopsys PrimePower for power analysis.
+- Synopsys PrimeTime for timing and path verification.
+- Tested with RISC-V toolchain and custom test programs.
 
 ### Tools and Technologies:
-Hardware Description Language: Verilog
-Simulation: Testbench + GTKWave
-Timing & Power Analysis: Synopsys PrimeTime, Synopsys PrimePower
-RISC-V Toolchain: GCC compiler and Spike simulator
+- Hardware Description Language: Verilog
+- Simulation: Testbench + GTKWave
+- Timing & Power Analysis: Synopsys PrimeTime, Synopsys PrimePower
+- RISC-V Toolchain: GCC compiler and Spike simulator
 
 
 ## Links
