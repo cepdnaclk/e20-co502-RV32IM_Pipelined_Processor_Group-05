@@ -67,7 +67,7 @@ This project strengthens understanding of processor architecture, pipeline behav
 - Hardware Description Language: Verilog
 - Simulation: Testbench + GTKWave
 - Timing & Power Analysis: Synopsys PrimeTime, Synopsys PrimePower
-- RISC-V Toolchain: GCC compiler and Spike simulator
+
 
 
 ## Links
