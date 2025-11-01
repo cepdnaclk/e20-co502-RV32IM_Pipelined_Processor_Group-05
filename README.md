@@ -26,11 +26,11 @@ This is a sample image, to show how to add images to your page. To learn more op
 
 ## RV32IM Pipeline Processor Design
 
-This project focuses on designing a 32-bit RISC-V RV32IM pipeline processor with five stages: Instruction Fetch (IF), Decode (ID), Execute (EX), Memory Access (MEM), and Write Back (WB). The processor supports the RV32I base instructions and the M-extension for integer multiplication and division. The design emphasizes efficient instruction flow with minimized hazards, utilizing forwarding and stalling for data hazards and branch prediction for control hazards.
+This project involves designing a 32-bit RISC-V RV32IM pipelined processor featuring the standard five stages: Instruction Fetch (IF), Instruction Decode (ID), Execute (EX), Memory Access (MEM), and Write Back (WB). The processor supports the full RV32I base instruction set along with the M-extension for integer multiplication and division. The design emphasizes correct instruction flow, efficient pipeline operation, and proper handling of hazards.
 
-The processor is implemented using Verilog , simulated with tools like ModelSim, and tested using the RISC-V toolchain and compliance tests. Performance optimizations include pipeline balancing and optional cache integration for faster memory access. The project delivers a functional HDL codebase, test results, and optionally, an FPGA prototype.
+The processor is implemented in Verilog and verified using comprehensive simulation workflows. A custom testbench is used to stimulate the processor, while GTKWave assists with waveform analysis. Power and timing characteristics are evaluated using Synopsys PrimePower and PrimeTime, providing accurate reports for performance and timing validation.
 
-This design project enhances understanding of processor architecture, pipelining, and ISA implementation, providing a solid foundation for exploring advanced computer engineering concepts.
+This project strengthens understanding of processor architecture, pipeline behavior, RISC-V ISA implementation, timing analysis, and low-level hardware design.
 
 ## Key Features of the RV32IM Processor
 
@@ -51,18 +51,23 @@ Data hazards: Managed through forwarding and stalling mechanisms.
 Control hazards: Addressed using branch prediction or static/dynamic strategies.
 
 ### Performance Enhancements:
-Pipeline balancing to reduce cycle latency.
-Cache integration for faster memory access.
+Pipeline balancing for improved throughput.
+Timing optimization based on PrimeTime analysis.
+Power evaluation using PrimePower.
 
 ### Simulation and Verification:
-Implemented using HDL (Verilog or VHDL).
-Verified using testbenches with RISC-V compliance tests and custom test cases.
+Verilog implementation using structured modular design.
+Testbench-based simulation to validate functional correctness.
+GTKWave for waveform inspection.
+Synopsys PrimePower for power analysis.
+Synopsys PrimeTime for timing and path verification.
+Tested with RISC-V toolchain and custom test programs.
 
 ### Tools and Technologies:
-Hardware Description Language (HDL): Verilog/VHDL for processor implementation.
-Simulation Tools: ModelSim, Vivado, or equivalent.
-Synthesis Tools: FPGA tools like Quartus or Vivado for hardware prototyping.
-RISC-V Toolchain: GCC compiler and spike simulator for program generation and debugging.
+Hardware Description Language: Verilog
+Simulation: Testbench + GTKWave
+Timing & Power Analysis: Synopsys PrimeTime, Synopsys PrimePower
+RISC-V Toolchain: GCC compiler and Spike simulator
 
 
 ## Links
